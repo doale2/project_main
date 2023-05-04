@@ -28,7 +28,7 @@ def select_data_folder(self):
         subdir_path = os.path.join(data_folder_path, subdir)
         self.xml_files += select_lmzc_files(subdir_path)
 
-    # Store the selected files and path in the class variables
+    # Store path in the class variables
     self.data_folder_path = data_folder_path
 
     # Update the GUI labels with the selected path and number of files
@@ -36,38 +36,6 @@ def select_data_folder(self):
     self.num_files_label.config(text=f"Number of Files: {len(self.xml_files)}")
 
 # ver2
-# def select_data_folder(self):
-#     # Select the data folders
-#     data_folder_paths = filedialog.askopenfilenames(initialdir=os.path.join(os.getcwd(), "../dat"),
-#                                                     title="Select XML files", filetypes=[("XML Files", "*.xml")],
-#                                                     parent=self)
-#
-#     # If at least one folder is selected
-#     if data_folder_paths:
-#         # Clear the listbox
-#         self.data_folder_listbox.delete(0, tk.END)
-#
-#         # Store the selected paths in the class variable
-#         self.data_folder_paths = data_folder_paths
-#
-#         # Add the selected paths to the listbox
-#         for path in data_folder_paths:
-#             self.data_folder_listbox.insert(tk.END, path)
-#
-#         # Select LMZC XML files in the selected data folders and all subdirectories
-#         lmzc_files = []
-#         for path in data_folder_paths:
-#             lmzc_files += select_lmzc_files(path)
-#
-#         # Store the selected files and path in the class variables
-#         self.xml_files = lmzc_files
-#         self.data_folder_path = os.path.commonpath(data_folder_paths)
-#
-#         # Update the GUI labels with the selected path and number of files
-#         self.data_folder_label.config(text=f"Data Folders: {', '.join(data_folder_paths)}")
-#         self.num_files_label.config(text=f"Number of Files: {len(lmzc_files)}")
-
-# ver3
 # def select_data_folder(self):
 #     # Select the data folders
 #     data_folder_paths = filedialog.askopenfilenames(initialdir=os.path.join(os.getcwd(), "../dat"),
