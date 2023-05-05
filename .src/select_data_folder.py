@@ -1,7 +1,7 @@
 import os
 import tkinter as tk
 from tkinter import filedialog
-from select_xml import select_lmzc_files
+from select_xml import select_lmz_files
 
 
 # ver1
@@ -26,7 +26,7 @@ def select_data_folder(self):
     # Select LMZC XML files in the selected data folder and all subdirectories
     for subdir in subdirectories:
         subdir_path = os.path.join(data_folder_path, subdir)
-        self.xml_files += select_lmzc_files(subdir_path)
+        self.xml_files += select_lmz_files(subdir_path)
 
     # Store path in the class variables
     self.data_folder_path = data_folder_path

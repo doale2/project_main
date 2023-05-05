@@ -4,6 +4,7 @@ from tkinter import messagebox
 from select_data_folder import select_data_folder
 from init_GUI import init_GUI
 from clear_selected_files import clear_selected_files
+from iv_graph import save_png_iv
 
 
 class App(tk.Tk):
@@ -18,13 +19,11 @@ class App(tk.Tk):
         clear_selected_files(self)
 
     def analyze_data(self):
-        # Analyze the selected data
-        # ...
-        pass
+        save_png_iv(self)
 
-    def select_folder(self, event):
-        self.folder_path = os.path.join(self.data_folder_path, self.folder_var.get())
-        self.data_folder_label.config(text=f"Data Folder: {self.folder_path}")
+    def select_folder(self):
+        folder_path = os.path.join(self.data_folder_path, self.folder_var.get())
+        self.data_folder_label.config(text=f"Data Folder: {folder_path}")
 
     def show_selected_files(self):
         if self.xml_files:
