@@ -4,7 +4,7 @@ from tkinter import messagebox
 from select_data_folder import select_data_folder
 from init_GUI import init_GUI
 from clear_selected_files import clear_selected_files
-from iv_graph import save_png_iv
+from analyze_data import analyze_data
 
 
 class App(tk.Tk):
@@ -18,8 +18,8 @@ class App(tk.Tk):
     def clear_selected_files(self):
         clear_selected_files(self)
 
-    def analyze_data(self):
-        save_png_iv(self)
+    def analyze_data(self, option_list):
+        analyze_data(self, option_list)
 
     def select_folder(self):
         folder_path = os.path.join(self.data_folder_path, self.folder_var.get())

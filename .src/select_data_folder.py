@@ -34,25 +34,3 @@ def select_data_folder(self):
     # Update the GUI labels with the selected path and number of files
     self.data_folder_label.config(text=f"Data Folder: {data_folder_path}")
     self.num_files_label.config(text=f"Number of Files: {len(self.xml_files)}")
-
-# ver2
-# def select_data_folder(self):
-#     # Select the data folders
-#     data_folder_paths = filedialog.askopenfilenames(initialdir=os.path.join(os.getcwd(), "../dat"),
-#                                                     title="Select Data Folders", parent=self,
-#                                                     filetypes=[("Directory", "*")])
-#
-#     if not data_folder_paths:
-#         return []  # Cancelled
-#
-#     # Find all subdirectories in the selected data folders
-#     subdirectories = []
-#     for folder_path in data_folder_paths:
-#         for dirpath, dirnames, filenames in os.walk(folder_path):
-#             for dirname in dirnames:
-#                 subdirectories.append(os.path.join(dirpath, dirname))
-#
-#     # Combine selected directories and all subdirectories
-#     data_folders = list(data_folder_paths) + subdirectories
-#
-#     return data_folders

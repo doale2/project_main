@@ -37,14 +37,13 @@ def handle_subplot(ax1, ax2, ax3, ax4):
     ]
 
     for i, axs in enumerate([ax1, ax2, ax3, ax4]):
-        details = detail_list[i]
-        axs.set_xlabel(details[f'ax{i + 1}_xlabel'], size=details[f'ax{i + 1}_size'], fontweight='bold')
-        axs.set_ylabel(details[f'ax{i + 1}_ylabel'], size=details[f'ax{i + 1}_size'], fontweight='bold')
-        axs.set_title(details[f'ax{i + 1}_title'], size=details[f'ax{i + 1}_titlesize'], fontweight='bold',
-                      style='italic')
-        axs.tick_params(axis='both', which='major', size=details[f'ax{i + 1}_legendsize'])  # tick 크기 설정
-        axs.legend(loc=details[f'ax{i + 1}_legendloc'], ncol=details[f'ax{i + 1}_legendncol'],
-                   fontsize=details[f'ax{i + 1}_legendsize'])
-        axs.grid()
-    ax1.set_yscale('log', base=10)
-
+        if axs is not None:
+            details = detail_list[i]
+            axs.set_xlabel(details[f'ax{i + 1}_xlabel'], size=details[f'ax{i + 1}_size'], fontweight='bold')
+            axs.set_ylabel(details[f'ax{i + 1}_ylabel'], size=details[f'ax{i + 1}_size'], fontweight='bold')
+            axs.set_title(details[f'ax{i + 1}_title'], size=details[f'ax{i + 1}_titlesize'], fontweight='bold',
+                          style='italic')
+            axs.tick_params(axis='both', which='major', size=details[f'ax{i + 1}_legendsize'])  # tick 크기 설정
+            axs.legend(loc=details[f'ax{i + 1}_legendloc'], ncol=details[f'ax{i + 1}_legendncol'],
+                       fontsize=details[f'ax{i + 1}_legendsize'])
+            axs.grid()
