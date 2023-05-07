@@ -35,7 +35,7 @@ def init_GUI(self):
         'ax2' if method_var2.get() else None,
         'ax3' if method_var3.get() else None,
         'ax4' if method_var4.get() else None,
-        'save_csv' if method_var5.get() else None,
+        'save_csv' if method_var5.get() else None
     ]))
     self.analyze_button.grid(row=5, column=0, padx=5, pady=5, sticky="w")
 
