@@ -1,23 +1,23 @@
 from select_analyze_data import select_analyze_data
 from iv_graph import parsing_iv_data, plot_iv, save_png_iv
 from handle_subplot import handle_subplot
+from ts_graph import ts_graph, ts_fitting_graph, flat_ts_graph
 
 
-def function1(ax, xml):
-    plot_iv(ax, parsing_iv_data(xml))
-    save_png_iv(xml)
+def function1(ax1, xml):
+    plot_iv(ax1, parsing_iv_data(xml))
 
 
-def function2(ax, xml):
-    pass
+def function2(ax2, xml):
+    ts_graph(ax2, xml)
 
 
-def function3(ax, xml):
-    pass
+def function3(ax3, xml):
+    ts_fitting_graph(ax3, xml)
 
 
-def function4(ax, xml):
-    pass
+def function4(ax4, xml):
+    flat_ts_graph(ax4, xml)
 
 
 def analyze_data(self, option_list):
@@ -37,3 +37,4 @@ def analyze_data(self, option_list):
             function4(ax4, xml)
 
         handle_subplot(ax1, ax2, ax3, ax4)
+        save_png_iv(xml)

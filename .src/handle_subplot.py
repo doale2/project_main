@@ -1,20 +1,3 @@
-import matplotlib.pyplot as plt
-
-
-def initialize_subplot():
-    # Initialize subplot
-    fig, axs = plt.subplots(2, 3, figsize=(18, 8))
-    # Increase the horizontal and vertical spacing between subplots
-    fig.subplots_adjust(hspace=0.5, wspace=0.5)
-    # Numbering each subplot
-    ax1, ax2, ax3, ax4 = axs[1][0], axs[0][0], axs[0][1], axs[0][2]
-    # Hide other graph
-    for axs in axs.flatten():
-        if axs not in [ax1, ax2, ax3, ax4]:
-            axs.axis('off')
-    return ax1, ax2, ax3, ax4
-
-
 def handle_subplot(ax1, ax2, ax3, ax4):
     # Setting details
     detail_list = [
