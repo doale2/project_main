@@ -82,12 +82,12 @@ def extract_max_r2_value_ax3(xml):
     else:
         error_flag = 1
 
-    return f, error_flag, max_f, max_transmission
+    return error_flag, max_f, max_r2, max_transmission
 
 
 def flat_ts_graph(ax4, xml):
     root, wavelength_data = parsing_ts_ref_data(xml)
-    f, error_flag, max_f, max_transmission = extract_max_r2_value_ax3(xml)
+    error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
 
     cmap = plt.colormaps.get_cmap('jet')
     # Iterate over the first 6 WavelengthSweep elements

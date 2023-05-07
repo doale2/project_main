@@ -4,3 +4,4 @@ numpy~=1.24.3
 scikit-learn~=1.2.2
 lmfit~=1.2.1
 PyQt5~=5.15.9
+pandas~=2.0.1
