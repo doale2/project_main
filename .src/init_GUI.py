@@ -50,16 +50,16 @@ def init_GUI(self):
     self.folder_select = ttk.Combobox(self, textvariable=self.folder_var, state='readonly')
     self.folder_select.bind('<<ComboboxSelected>>', self.select_folder)
 
-    self.toggle_button = tk.Checkbutton(self, text="method1", padx=20, variable=method_var1)
+    self.toggle_button = tk.Checkbutton(self, text="IV_graph", padx=20, variable=method_var1)
     self.toggle_button.grid(row=6, column=0, padx=5, pady=5, sticky="w")
 
-    self.toggle_button2 = tk.Checkbutton(self, text="method2", padx=20, variable=method_var2)
+    self.toggle_button2 = tk.Checkbutton(self, text="TS_graph", padx=20, variable=method_var2)
     self.toggle_button2.grid(row=7, column=0, padx=5, pady=5, sticky="w")
 
-    self.toggle_button3 = tk.Checkbutton(self,text="method3", padx=20, variable=method_var3)
+    self.toggle_button3 = tk.Checkbutton(self,text="TS_fitting_8th", padx=20, variable=method_var3)
     self.toggle_button3.grid(row=8, column=0, padx=5, pady=5, sticky="w")
 
-    self.toggle_button4 = tk.Checkbutton(self,text="method4", padx=20, variable=method_var4)
+    self.toggle_button4 = tk.Checkbutton(self,text="Flat_TS_graph", padx=20, variable=method_var4)
     self.toggle_button4.grid(row=9, column=0, padx=5, pady=5, sticky="w")
 
     self.toggle_button5 = tk.Checkbutton(self,text="save_csv", padx=20, variable=method_var5)
