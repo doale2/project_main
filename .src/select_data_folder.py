@@ -7,7 +7,7 @@ from select_xml import select_lmz_files
 # ver1
 def select_data_folder(self):
     # Select the data folder
-    data_folder_path = filedialog.askdirectory(initialdir=os.path.join(os.getcwd(), "../dat"), title="Select XML file",
+    data_folder_path = filedialog.askdirectory(initialdir=os.path.join(os.getcwd(), "./dat"), title="Select XML file",
                                                parent=self)
     if data_folder_path:
         self.data_folder_label.config(text=f"Data Folder: {data_folder_path}")

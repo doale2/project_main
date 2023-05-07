@@ -33,8 +33,3 @@ class App(tk.Tk):
         else:
             # If there are no selected files, show an error message
             messagebox.showerror("No Files Selected", "Please select data folder first.")
-
-
-if __name__ == "__main__":
-    app = App()
-    app.mainloop()

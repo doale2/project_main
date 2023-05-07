@@ -1,5 +1,5 @@
 import sys
-sys.path.append('./src')
+sys.path.append('./.src/')
 from main import App
 
 if __name__ == "__main__":
