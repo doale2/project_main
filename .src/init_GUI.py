@@ -10,7 +10,7 @@ def init_GUI(self):
     method_var5 = tk.IntVar()
 
     self.title("Wafer Analysis")
-    self.geometry("380x600")
+    self.geometry("380x500")
 
     self.data_folder_label = tk.Label(self, text="Data Folder: ")
     self.data_folder_label.grid(row=0, column=0, sticky="w")
