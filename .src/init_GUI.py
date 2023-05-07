@@ -15,7 +15,7 @@ def init_GUI(self):
     self.data_folder_label = tk.Label(self, text="Data Folder: ")
     self.data_folder_label.grid(row=0, column=0, sticky="w")
 
-    self.data_folder_listbox = tk.Listbox(self, width=38)
+    self.data_folder_listbox = tk.Listbox(self, width=52)
     self.data_folder_listbox.grid(row=1, column=0, padx=5, pady=5, sticky="nsew")
 
     self.set_data_folder_button = tk.Button(self, text="Set Data Folder", command=self.select_data_folder)
