@@ -27,7 +27,7 @@ def function5(xml):
 
 def analyze_data(self, option_list):
     print(option_list)
-    for xml in self.xml_files:
+    for i, xml in enumerate(self.xml_files):
         ax1, ax2, ax3, ax4 = select_analyze_data(option_list)
 
         # data 분석할 것들을 모음
@@ -45,3 +45,8 @@ def analyze_data(self, option_list):
 
         handle_subplot(ax1, ax2, ax3, ax4)
         save_png_iv(xml)
+        self.update()
+        self.progress_bar.step(100/len(self.xml_files))
+        self.progress_ratio_label.config(text=f"Progress ratio: {round((i+1)*100/len(self.xml_files))}%")
+    self.update()
+

@@ -34,4 +34,4 @@ def plot_iv(ax1, iv_data):
 
 
 def save_png_iv(xml):
-    plt.savefig(f'../res/png_files/{os.path.basename(xml)}.png', dpi=300)
+    plt.savefig(f'./res/png_files/{os.path.basename(xml)}.png', dpi=300)

@@ -30,6 +30,11 @@ def init_GUI(self):
     self.clear_selected_files_button = tk.Button(self, text="Clear Files", command=self.clear_selected_files)
     self.clear_selected_files_button.grid(row=3, column=0, padx=5, pady=5, sticky="e")
 
+    self.progress_ratio_label = tk.Label(self, text="Progress ratio:  0%")
+    self.progress_ratio_label.grid(row=5, column=0, sticky="e")
+
+    self.progress_bar = ttk.Progressbar(self, length=110,orient="horizontal", mode="determinate")
+    self.progress_bar.grid(row=6, column=0, sticky="e")
     self.analyze_button = tk.Button(self, text="Analyze", command=lambda: self.analyze_data([
         'ax1' if method_var1.get() else None,
         'ax2' if method_var2.get() else None,

@@ -19,7 +19,11 @@ class App(tk.Tk):
         clear_selected_files(self)
 
     def analyze_data(self, option_list):
+        self.progress_bar.start(100)
         analyze_data(self, option_list)
+        self.progress_bar.stop()
+        messagebox.showinfo("Done!", "Data analysis is complete.")
+        self.progress_ratio_label.config(text="Progress ratio:  0%")
 
     def select_folder(self):
         folder_path = os.path.join(self.data_folder_path, self.folder_var.get())

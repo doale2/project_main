@@ -51,4 +51,4 @@ def save_csv(xml):
                        'Rsq of IV': r2_score(iv_data['current'], y_fit), 'I at -1V [A]': iv_data['current'][4],
                        'I at 1V [A]': iv_data['current'][-1]})
 
-    df.to_csv(f'../res/csv_files/{os.path.basename(xml)}.csv', index=False)
+    df.to_csv(f'./res/csv_files/{os.path.basename(xml)}.csv', index=False)
