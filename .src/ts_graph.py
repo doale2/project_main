@@ -44,11 +44,10 @@ def ts_graph(ax2, xml):
 
 
 def ts_fitting_graph(ax3, xml):
-    root, wavelength_data = parsing_ts_ref_data(xml)
-    cmap = plt.colormaps.get_cmap('jet')
-
     import warnings
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
+    root, wavelength_data = parsing_ts_ref_data(xml)
+    cmap = plt.colormaps.get_cmap('jet')
 
     r2_list = []
     ax3.plot('wavelength', 'measured_transmission', data=wavelength_data, label='')
@@ -86,6 +85,8 @@ def extract_max_r2_value_ax3(xml):
 
 
 def flat_ts_graph(ax4, xml):
+    import warnings
+    warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     root, wavelength_data = parsing_ts_ref_data(xml)
     error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
 
