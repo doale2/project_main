@@ -4,24 +4,29 @@
 *****
 
 # Contents  
-- [Introduction](#Introduction)     
-- [Install](#Install)  
-- [Contributor](#Contributor)  
+- [Overview](#Overview)     
+- [Installation](#Installtion)  
 - [Usage](#Usage)  
+- [Contributor](#Contributor)
 - [Environment](#Environment)  
+- [Acknowledgments](#Acknowledgments)
 - [Enquiry](#Enquiry)  
 
 *****
 
-## Introduction    
+## Overview   
 
-## Install  
+## Installation  
 
-## Contributor
+## Usage  
 
-## Usage
+## Contributor  
 
-## Environment
+## Environment  
+- python 3.10
+- Window 10
 
-## Enquiry
+## Acknowledgments  
+
+## Enquiry  
 
