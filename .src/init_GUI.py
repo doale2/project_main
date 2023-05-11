@@ -8,9 +8,10 @@ def init_GUI(self):
     method_var3 = tk.IntVar()
     method_var4 = tk.IntVar()
     method_var5 = tk.IntVar()
+    method_var6 = tk.IntVar()
 
     self.title("Wafer Analysis")
-    self.geometry("380x500")
+    self.geometry("380x600")
 
     self.data_folder_label = tk.Label(self, text="Data Folder: ")
     self.data_folder_label.grid(row=0, column=0, sticky="w")
@@ -40,7 +41,8 @@ def init_GUI(self):
         'ax2' if method_var2.get() else None,
         'ax3' if method_var3.get() else None,
         'ax4' if method_var4.get() else None,
-        'save_csv' if method_var5.get() else None
+        'save_csv' if method_var5.get() else None,
+        'ax5' if method_var6.get() else None
     ]))
     self.analyze_button.grid(row=5, column=0, padx=5, pady=5, sticky="w")
 
@@ -64,3 +66,6 @@ def init_GUI(self):
 
     self.toggle_button5 = tk.Checkbutton(self,text="save_csv", padx=20, variable=method_var5)
     self.toggle_button5.grid(row=10, column=0, padx=5, pady=5, sticky="w")
+
+    self.toggle_button6 = tk.Checkbutton(self,text="flat_flatgraph", padx=20, variable=method_var6)
+    self.toggle_button6.grid(row=11, column=0, padx=5, pady=5, sticky="w")
