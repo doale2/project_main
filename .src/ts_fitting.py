@@ -89,7 +89,8 @@ def plot_fitting_graph(ax6, xml):
             result = model.fit(wavelength_data['measured_transmission'], wavelength=wavelength)
             ax6.plot(wavelength_data['wavelength'], result.best_fit, linestyle='-', lw=2, color='aqua',
                      label=wavelength_sweep.get('DCBias') + 'best-fit')
-            print(result.best_values)
+            ax6.annotate(f"{result.best_values}", xy=(1580, 1.0), ha='right',
+                         fontsize=8)
 
 
 def fitting_extract_n_eff(wavelength, I_0, n_eff):
