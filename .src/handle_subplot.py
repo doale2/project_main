@@ -1,4 +1,4 @@
-def handle_subplot(ax1, ax2, ax3, ax4, ax5):
+def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6):
     # Setting details
     detail_list = [
         {'ax1_title': 'IV - analysis', 'ax1_titlesize': 11,
@@ -21,10 +21,15 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5):
         {'ax5_title': 'Flat Flat TS', 'ax5_titlesize': 11,
          'ax5_xlabel': 'Wavelength [nm]', 'ax5_ylabel': 'Intensity [a.u.]', 'ax5_size': 9,
          'ax5_ticksize': 14,
-         'ax5_legendloc': 'lower center', 'ax5_legendncol': 3, 'ax5_legendsize': 8}
+         'ax5_legendloc': 'lower center', 'ax5_legendncol': 3, 'ax5_legendsize': 8},
+
+        {'ax6_title': 'Fitting FFT', 'ax6_titlesize': 11,
+         'ax6_xlabel': 'Wavelength [nm]', 'ax6_ylabel': 'Intensity [a.u.]', 'ax6_size': 9,
+         'ax6_ticksize': 14,
+         'ax6_legendloc': 'lower center', 'ax6_legendncol': 3, 'ax6_legendsize': 8}
     ]
 
-    for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5]):
+    for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6]):
         if axs is not None:
             details = detail_list[i]
             axs.set_xlabel(details[f'ax{i + 1}_xlabel'], size=details[f'ax{i + 1}_size'], fontweight='bold')

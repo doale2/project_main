@@ -11,12 +11,12 @@ def init_GUI(self):
     method_var6 = tk.IntVar()
 
     self.title("Wafer Analysis")
-    self.geometry("380x600")
+    self.geometry("390x600")
 
     self.data_folder_label = tk.Label(self, text="Data Folder: ")
-    self.data_folder_label.grid(row=0, column=0, sticky="w")
+    self.data_folder_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
 
-    self.data_folder_listbox = tk.Listbox(self, width=52)
+    self.data_folder_listbox = tk.Listbox(self, width=54)
     self.data_folder_listbox.grid(row=1, column=0, padx=5, pady=5, sticky="nsew")
 
     self.set_data_folder_button = tk.Button(self, text="Set Data Folder", command=self.select_data_folder)
@@ -36,6 +36,7 @@ def init_GUI(self):
 
     self.progress_bar = ttk.Progressbar(self, length=110,orient="horizontal", mode="determinate")
     self.progress_bar.grid(row=6, column=0, padx=5, pady=5, sticky="e")
+
     self.analyze_button = tk.Button(self, text="Analyze", command=lambda: self.analyze_data([
         'ax1' if method_var1.get() else None,
         'ax2' if method_var2.get() else None,

@@ -9,7 +9,7 @@ def select_analyze_data(options):
     fig.subplots_adjust(hspace=0.5, wspace=0.5)
 
     # axs에 값이 있는 method_var들만 할당
-    ax1, ax2, ax3, ax4, ax5 = None, None, None, None, None
+    ax1, ax2, ax3, ax4, ax5, ax6 = None, None, None, None, None, None
     axs_list = []
 
     for i in non_empty_vars:
@@ -28,10 +28,12 @@ def select_analyze_data(options):
         if i == 'ax5':
             ax5 = axs[1][1]
             axs_list.append(ax5)
+            ax6 = axs[1][2]
+            axs_list.append(ax6)
 
     # Hide other graph
     for ax in axs.flatten():
-        if ax not in [ax1, ax2, ax3, ax4, ax5]:
+        if ax not in [ax1, ax2, ax3, ax4, ax5, ax6]:
             ax.axis('off')
 
-    return ax1, ax2, ax3, ax4, ax5
+    return ax1, ax2, ax3, ax4, ax5, ax6
