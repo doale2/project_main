@@ -27,7 +27,61 @@ pip install -r requirements.txt
 프로그램을 사용하는 자세한 방법
 
 ## Contributor  
-기여자들 profile
+_Department of Photonics and Nanoelectronics_
+
+_In HANYANG University ERICA Campus_
+
+
+
+- **Jungwan Noh**
+
+  <img src="https://github.com/PE02teamD/project_main/assets/127360946/742c4597-5dca-40e8-8199-88ec694cd15a" width="195" height="240"/>
+
+  **A principal developer👑**
+
+  Implemented Tkinter GUI
+
+  Extracted to XML files
+
+  Saved to CSV, PNG files 
+
+  Graph fitting
+
+  Modulization python files
+
+  [npower220@hanyang.ac.kr](npower220@hanyang.ac.kr)
+
+<br/>
+
+- **Kyusik Kim**
+
+  <img src="https://github.com/PE02teamD/project_main/assets/127360946/41083b56-6cdd-48a7-b609-101b4abdb7a1" width="190" height="250"/>
+
+  Diversification of data file selection
+
+  [kimq6@hanyang.ac.kr](kimq6@hanyang.ac.kr)
+
+<br/>
+
+- **Yujeong Kim**
+
+  <img src="https://github.com/PE02teamD/project_main/assets/127360946/371677b4-9e92-412f-aa83-78b35d472eb9" width="195" height="240"/>
+
+  implemented I-V Curve graph
+
+  implemented transmission spectra graph
+
+  [govldjsgovl@hanyang.ac.kr](govldjsgovl@hanyang.ac.kr)
+
+ <br/>
+
+- **Dohyeon Lee**
+
+  <img src="https://github.com/PE02teamD/project_main/assets/127360946/9e2c72d5-4ae3-4784-a986-ffe3a2cbe16b" width="240" height="180"/>
+
+  Modulization some python files
+
+  [ehgus9806@hanyang.ac.kr](ehgus9806@hanyang.ac.kr)
 
 ## Environment  
 <div align=center>
