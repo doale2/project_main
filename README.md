@@ -33,11 +33,11 @@ _In HANYANG University ERICA Campus_
 
 
 
-- **Jungwan Noh 👑**
+- **Jungwan Noh**
   
   <img src="https://github.com/PE02teamD/project_main/assets/127360946/742c4597-5dca-40e8-8199-88ec694cd15a" width="195" height="240"/>
 
-  **A principal developer**
+  **A principal developer👑**
   
   Implemented Tkinter GUI
   
