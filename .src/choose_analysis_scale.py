@@ -3,6 +3,7 @@ import tkinter as tk
 
 
 def choose_analysis_scale(self):
+    self.choose_dict = {}
     lot_set = set()
     wafer_set = set()
     coordinate_set = set()
@@ -15,20 +16,26 @@ def choose_analysis_scale(self):
                 lot_set.add(file_split[0])
                 wafer_set.add(file_split[1])
                 coordinate_set.add(file_split[2])
+                file_path = os.path.join(root, file)
+                # 키:파일경로, 값:[lot, wafer, coordinate]인 dict
+                self.choose_dict[file_path] = [file_split[0], file_split[1], file_split[2]]
 
-    # gui에 넣기
-    for lot in lot_set:
-        self.select_listbox1.insert(0, lot)
+    # list로 변환, 오름차순 정렬
+    self.lot_list = list(lot_set)
+    self.lot_list.sort()
+    self.wafer_list = list(wafer_set)
+    self.wafer_list.sort()
+    self.coordinate_list = list(coordinate_set)
+    self.coordinate_list.sort()
 
-    for wafer in wafer_set:
-        self.select_listbox2.insert(0, wafer)
+    # gui에 표시하기
+    for lot in self.lot_list:
+        self.select_listbox1.insert(tk.END, lot)
 
-    for coordinate in coordinate_set:
-        self.select_listbox3.insert(0, coordinate)
+    for wafer in self.wafer_list:
+        self.select_listbox2.insert(tk.END, wafer)
 
-#    print(f'{lot_set}\n{wafer_set}\n{coordinate_set}')
-#    selection = self.select_listbox1.get(ACTIVE)
-#    print(selection)
+    for coordinate in self.coordinate_list:
+        self.select_listbox3.insert(tk.END, coordinate)
 
-
-
+    self.num_files_label.config(text=f"Number of Files: {len(self.xml_files)}")
