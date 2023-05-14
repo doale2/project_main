@@ -32,11 +32,11 @@ _Department of Photonics and Nanoelectronics_
 _In HANYANG University ERICA Campus_
 
 
-<img src="https://github.com/PE02teamD/project_main/assets/127360946/742c4597-5dca-40e8-8199-88ec694cd15a" width="195" height="240"/>
-
 
 - **Jungwan Noh 👑**
   
+  <img src="https://github.com/PE02teamD/project_main/assets/127360946/742c4597-5dca-40e8-8199-88ec694cd15a" width="195" height="240"/>
+
   **A principal developer**
   
   Implemented Tkinter GUI
@@ -51,20 +51,23 @@ _In HANYANG University ERICA Campus_
   
   [npower220@hanyang.ac.kr](npower220@hanyang.ac.kr)
 
-<img src="https://github.com/PE02teamD/project_main/assets/127360946/41083b56-6cdd-48a7-b609-101b4abdb7a1" width="190" height="250"/>
+
+
 
 
 - **Kyusik Kim**
  
+  <img src="https://github.com/PE02teamD/project_main/assets/127360946/41083b56-6cdd-48a7-b609-101b4abdb7a1" width="190" height="250"/>
+
   Diversification of data file selection
 
   [kimq6@hanyang.ac.kr](kimq6@hanyang.ac.kr)
 
 
-<img src="https://github.com/PE02teamD/project_main/assets/127360946/371677b4-9e92-412f-aa83-78b35d472eb9" width="195" height="240"/>
-
 
 - **Yujeong Kim**
+
+  <img src="https://github.com/PE02teamD/project_main/assets/127360946/371677b4-9e92-412f-aa83-78b35d472eb9" width="195" height="240"/>
 
   implemented I-V Curve graph
 
@@ -72,9 +75,10 @@ _In HANYANG University ERICA Campus_
   
   [govldjsgovl@hanyang.ac.kr](govldjsgovl@hanyang.ac.kr)
 
-<img src="https://github.com/PE02teamD/project_main/assets/127360946/9e2c72d5-4ae3-4784-a986-ffe3a2cbe16b" width="240" height="180"/>
 
 - **Dohyeon Lee**
+
+  <img src="https://github.com/PE02teamD/project_main/assets/127360946/9e2c72d5-4ae3-4784-a986-ffe3a2cbe16b" width="240" height="180"/>
 
   Modulization some python files
 
