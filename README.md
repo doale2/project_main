@@ -16,8 +16,15 @@
 *****
 
 ## Overview   
-웨이퍼 분석 프로그램에 대한 설명적기
+*Wafer-scale data* processing refers to a technology that efficiently manages and utilizes 
+vast amounts of data of elements in each die at the wafer scale. 
+This requires the use of appropriate data formats and processing tools. 
 
+
+So our team created **a module that can efficiently extract and analyze the data**
+provided by the customer, it also shows and saves information in graphs and csv
+
+*****
 ## Installation  
  ```{.python}
 pip install -r requirements.txt
