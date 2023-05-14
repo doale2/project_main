@@ -101,7 +101,31 @@ def flat_ts_graph(ax4, xml):
         flat_measured_transmission -= max_f(wavelength)
         flat_wavelength_data['wavelength'].extend(wavelength)
         flat_wavelength_data['flat_measured_transmission'].extend(flat_measured_transmission)
-        # Create a scatter plot using the data
+        # Plot ax4 using the data
         ax4.plot('wavelength', 'flat_measured_transmission', data=flat_wavelength_data, color=color,
+                 label=wavelength_sweep.get('DCBias') + ' V'
+                 if wavelength_sweep != list(root.iter('WavelengthSweep'))[-1] else '')
+
+
+def flat_ts_graph_ax5(ax5, xml):
+    root, y2_wavelength_data = parsing_ts_ref_data(xml)
+    y3_format = None
+
+    cmap = plt.colormaps.get_cmap('jet')
+    for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
+        color = cmap(i / 7)
+        # Make it a dict for easier handling
+        wavelength_data = {'wavelength': [], 'measured_transmission': []}
+        # Get data from each element
+        wavelength = list(map(float, wavelength_sweep.find('L').text.split(',')))
+        measured_transmission = list(map(float, wavelength_sweep.find('IL').text.split(',')))
+        wavelength_data['wavelength'].extend(wavelength)
+        wavelength_data['measured_transmission'].extend(measured_transmission)
+        # Subtract y2 value
+        wavelength_data['measured_transmission'] -= y2_wavelength_data['measured_transmission']
+        # Subtract y3 value
+        wavelength_data['measured_transmission'] -= y3_format
+        # Plot ax5 using the data
+        ax5.plot('wavelength', 'flat_measured_transmission', data=wavelength_data, color=color,
                  label=wavelength_sweep.get('DCBias') + ' V'
                  if wavelength_sweep != list(root.iter('WavelengthSweep'))[-1] else '')
