@@ -5,6 +5,7 @@ from select_data_folder import select_data_folder
 from init_GUI import init_GUI
 from clear_selected_files import clear_selected_files
 from analyze_data import analyze_data
+from choose_analysis_scale import choose_analysis_scale
 
 
 class App(tk.Tk):
@@ -42,3 +43,6 @@ class App(tk.Tk):
         else:
             # If there are no selected files, show an error message
             messagebox.showerror("No Files Selected", "Please select data folder first.")
+
+    def choose_analysis_scale(self):
+        choose_analysis_scale(self)
