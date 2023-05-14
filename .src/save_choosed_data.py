@@ -1,5 +1,3 @@
-import os
-import tkinter as tk
 from itertools import product
 
 
@@ -19,11 +17,9 @@ def save_choosed_data(self):
 
     # 선택한 값을 dat_dict에서 찾아서 키값인 path를 select_path_list 에 저장
     select_path_list = []
-    asdf = list(product(*[select_lot_name, select_wafer_name, select_coordinate_name]))
-    print(asdf)
+    product_list = list(product(*[select_lot_name, select_wafer_name, select_coordinate_name]))
     for key, value in self.choose_dict.items():
-        for tuple in asdf:
-            if 'LMZ' in key and self.choose_dict[key] == list(tuple):
+        for file_info in product_list:
+            if 'LMZ' in key and self.choose_dict[key] == list(file_info):
                 select_path_list.append(key)
-    print(select_path_list)
     self.xml_files = select_path_list
