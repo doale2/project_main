@@ -14,60 +14,9 @@
 - [Enquiry](#enquiry)  
 
 *****
- 
+
 ## Overview   
-*Wafer-scale data* processing refers to a technology that efficiently manages and utilizes 
-vast amounts of data of elements in each die at the wafer scale. 
-This requires the use of appropriate data formats and processing tools. 
-
-
-So our team created **a module that can efficiently extract and analyze the data**
-provided by the customer, it also shows and saves information in graphs and csv files.
-
-
-Customers can select and analyze **files, lots, wafers, column&row** which they want.
-
- 
-### What you can analyze
-
-**IV graph**
-
-A graph that represents the voltage-current curve of a semiconductor device. 
-This graph is used to analyze the electrical characteristics of the device.
-
-**IV fitting**
- 
-The process of mathematically modeling the characteristics of a device 
-based on the data obtained from the IV graph. 
-We selected 8th function to fit it.
-
-
-**Transmission graph**
-
- A graph that shows how much light is transmitted through a semiconductor device
- or structure. This graph is used to analyze the optical properties of the device or structure.
-
-**Transmission fitting**
-
-The process of modeling the optical properties of a semiconductor device
-or structure based on the data obtained from the transmission graph.
-We selected both exponential and polynomial function to fit it.
-
-**Flat Transmission graph**
-
- A graph that shows how much light is transmitted through a semiconductor 
- device or structure at a constant rate over a specific wavelength range. 
- This graph is used to analyze important optical properties, such as the bandgap,
- of the device or structure.
-
-**Flat flat transmission graph**
-
-A graph that shows how much light is transmitted through a semiconductor
-device or structure at an even more constant rate than the flat transmission graph.
-This graph is used to more accurately analyze important optical properties,
-such as the bandgap, of the device or structure.
-
-*****
+웨이퍼 분석 프로그램에 대한 설명적기
 
 ## Installation  
  ```{.python}
@@ -84,35 +33,37 @@ _In HANYANG University ERICA Campus_
 
 
 
-- **Jungwan Noh**
-
+- **Jungwan Noh 👑**
+  
   <img src="https://github.com/PE02teamD/project_main/assets/127360946/742c4597-5dca-40e8-8199-88ec694cd15a" width="195" height="240"/>
 
-  **A principal developer👑**
-
+  **A principal developer**
+  
   Implemented Tkinter GUI
-
+  
   Extracted to XML files
 
   Saved to CSV, PNG files 
-
+  
   Graph fitting
 
   Modulization python files
-
+  
   [npower220@hanyang.ac.kr](npower220@hanyang.ac.kr)
 
-<br/>
+
+
+
 
 - **Kyusik Kim**
-
+ 
   <img src="https://github.com/PE02teamD/project_main/assets/127360946/41083b56-6cdd-48a7-b609-101b4abdb7a1" width="190" height="250"/>
 
   Diversification of data file selection
 
   [kimq6@hanyang.ac.kr](kimq6@hanyang.ac.kr)
 
-<br/>
+
 
 - **Yujeong Kim**
 
@@ -121,10 +72,9 @@ _In HANYANG University ERICA Campus_
   implemented I-V Curve graph
 
   implemented transmission spectra graph
-
+  
   [govldjsgovl@hanyang.ac.kr](govldjsgovl@hanyang.ac.kr)
 
- <br/>
 
 - **Dohyeon Lee**
 
