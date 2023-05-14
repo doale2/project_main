@@ -4,6 +4,7 @@ from handle_subplot import handle_subplot
 from ts_graph import ts_graph, ts_fitting_graph, flat_ts_graph
 from save_csv import save_csv
 from ts_fitting import flat_peak, plot_fitting_graph
+import os
 
 
 def function1(ax1, xml):
@@ -35,6 +36,10 @@ def function7(ax6, xml):
 
 
 def analyze_data(self, option_list):
+    # './res/csv_files/' 폴더 내 모든 csv 파일 삭제
+    [os.remove(os.path.join('./res/csv_files/', file)) for file in os.listdir('./res/csv_files/') if file.endswith('.csv')]
+    # './res/png_files/' 폴더 내 모든 png 파일 삭제
+    [os.remove(os.path.join('./res/png_files/', file)) for file in os.listdir('./res/png_files/') if file.endswith('.png')]
     print(option_list)
 
     for i, xml in enumerate(self.xml_files):
