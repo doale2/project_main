@@ -1,10 +1,11 @@
 import os
 import tkinter as tk
 from tkinter import messagebox
-from select_data_folder import select_data_folder
 from init_GUI import init_GUI
 from clear_selected_files import clear_selected_files
 from analyze_data import analyze_data
+from choose_analysis_scale import choose_analysis_scale
+from save_choosed_data import save_choosed_data
 
 
 class App(tk.Tk):
@@ -12,8 +13,11 @@ class App(tk.Tk):
         super().__init__()
         init_GUI(self)
 
-    def select_data_folder(self):
-        select_data_folder(self)
+    def choose_analysis_scale(self):
+        choose_analysis_scale(self)
+
+    def save_choosed_data(self):
+        save_choosed_data(self)
 
     def clear_selected_files(self):
         clear_selected_files(self)
