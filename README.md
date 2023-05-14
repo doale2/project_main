@@ -51,9 +51,7 @@ _In HANYANG University ERICA Campus_
   
   [npower220@hanyang.ac.kr](npower220@hanyang.ac.kr)
 
-
-
-
+<br/>
 
 - **Kyusik Kim**
  
@@ -63,7 +61,7 @@ _In HANYANG University ERICA Campus_
 
   [kimq6@hanyang.ac.kr](kimq6@hanyang.ac.kr)
 
-
+<br/>
 
 - **Yujeong Kim**
 
@@ -74,7 +72,8 @@ _In HANYANG University ERICA Campus_
   implemented transmission spectra graph
   
   [govldjsgovl@hanyang.ac.kr](govldjsgovl@hanyang.ac.kr)
-
+ 
+ <br/>
 
 - **Dohyeon Lee**
 
