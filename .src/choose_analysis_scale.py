@@ -37,5 +37,3 @@ def choose_analysis_scale(self):
 
     for coordinate in self.coordinate_list:
         self.select_listbox3.insert(tk.END, coordinate)
-
-    self.num_files_label.config(text=f"Number of Files: {len(self.xml_files)}")

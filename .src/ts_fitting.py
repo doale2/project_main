@@ -1,5 +1,6 @@
 import numpy as np
 from lmfit import Model
+from scipy.optimize import curve_fit
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
 from ts_graph import parsing_ts_ref_data, extract_max_r2_value_ax3
@@ -79,17 +80,25 @@ def plot_fitting_graph(ax6, xml):
             ax6.plot('wavelength', 'measured_transmission', data=wavelength_data, color=color, lw=1,
                      label=wavelength_sweep.get('DCBias') + ' V')
 
-            model = Model(fitting_extract_n_eff, independent_vars=['wavelength'], param_names=['I_0', 'n_eff'])
+            wavelength_data['measured_transmission'] += 0.5 * np.random.randn(len(wavelength))
 
-            # Set the initial parameter values and boundaries
-            model.set_param_hint('I_0', value=0.5, min=-1.0, max=1.0)
-            model.set_param_hint('n_eff', value=2.6, min=0.0, max=10.0)
+            bounds = ([0.0, 0.0], [np.inf, np.inf])
 
-            # Fit the model to the data
-            result = model.fit(wavelength_data['measured_transmission'], wavelength=wavelength)
-            ax6.plot(wavelength_data['wavelength'], result.best_fit, linestyle='-', lw=2, color='aqua',
+            popt, pcov = curve_fit(fitting_extract_n_eff, wavelength, wavelength_data['measured_transmission'], bounds=bounds, maxfev=10000)
+
+            y_fit = fitting_extract_n_eff(wavelength, *popt)
+
+            # model = Model(fitting_extract_n_eff, independent_vars=['wavelength'], param_names=['I_0', 'n_eff'])
+            #
+            # # Set the initial parameter values and boundaries
+            # model.set_param_hint('I_0', value=0.5, min=-1.0, max=1.0)
+            # model.set_param_hint('n_eff', value=2.6, min=0.0, max=10.0)
+            #
+            # # Fit the model to the data
+            # result = model.fit(wavelength_data['measured_transmission'], wavelength=wavelength)
+            ax6.plot(wavelength_data['wavelength'], y_fit, linestyle='-', lw=2, color='aqua',
                      label=wavelength_sweep.get('DCBias') + 'best-fit')
-            ax6.annotate(f"{result.best_values}", xy=(1580, 1.0), ha='right',
+            ax6.annotate(f"I_0: {popt[0]}, n_eff: {popt[1]}", xy=(1580, 1.0), ha='right',
                          fontsize=8)
 
 

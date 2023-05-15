@@ -23,3 +23,5 @@ def save_choosed_data(self):
             if 'LMZ' in key and self.choose_dict[key] == list(file_info):
                 select_path_list.append(key)
     self.xml_files = select_path_list
+
+    self.num_files_label.config(text=f"Number of Files: {len(self.xml_files)}")
