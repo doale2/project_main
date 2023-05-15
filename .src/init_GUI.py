@@ -43,10 +43,6 @@ def init_GUI(self):
 
     self.xml_files = []
 
-    self.folder_var = tk.StringVar(self)
-    self.folder_select = ttk.Combobox(self, textvariable=self.folder_var, state='readonly')
-    self.folder_select.bind("<<ComboboxSelected>>", self.select_folder)
-
     self.toggle_button = tk.Checkbutton(self, text="IV_graph", padx=20, variable=method_var1)
     self.toggle_button.grid(row=7, column=0, padx=5, pady=5, sticky="w")
 
