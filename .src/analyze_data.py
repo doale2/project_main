@@ -6,6 +6,7 @@ from ts_graph import ts_graph, ts_fitting_graph, flat_ts_graph
 from save_csv import save_csv
 from ts_fitting import flat_peak, plot_fitting_graph
 import os
+from datetime import datetime
 
 
 def analyze_consequence(self, option_list):
@@ -50,8 +51,8 @@ def function4(ax4, xml):
     flat_ts_graph(ax4, xml)
 
 
-def function5(xml):
-    save_csv(xml)
+def function5(xml, formatted_datetime):
+    save_csv(xml, formatted_datetime)
 
 
 def function6(ax5, xml):
@@ -62,9 +63,24 @@ def function7(ax6, xml):
     plot_fitting_graph(ax6, xml)
 
 
+def create_res_subfolders():
+    # 분석 시간 폴더 생성
+    current_datetime = datetime.now()
+    formatted_datetime = current_datetime.strftime("%Y.%m.%d-%H%M%S")
+    for root, dirs, files in os.walk('./dat'):
+        if os.path.basename(root) != 'dat':
+            for folder in dirs:
+                folder_path = os.path.join(root, folder)
+                res_folder_path = os.path.join(f'./res/{formatted_datetime}', os.path.relpath(folder_path, './dat'))
+                os.makedirs(res_folder_path, exist_ok=True)
+    return formatted_datetime
+
+
 def analyze_data(self, option_list):
+    formatted_datetime = create_res_subfolders()
     for i, xml in enumerate(self.xml_files):
         self.update()
+
         ax1, ax2, ax3, ax4, ax5, ax6 = select_analyze_data(option_list)
         # data 분석할 것들을 모음
         if 'ax1' in option_list:
@@ -77,13 +93,14 @@ def analyze_data(self, option_list):
         if 'ax4' in option_list:
             function4(ax4, xml)
         if 'save_csv' in option_list:
-            function5(xml)
+            function5(xml, formatted_datetime)
         if 'ax5' in option_list:
             function6(ax5, xml)
             function7(ax6, xml)
 
         handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6)
-        save_png_iv(xml)
+        save_png_iv(xml, formatted_datetime)
+
         self.progress_bar.step(100/len(self.xml_files))
         self.progress_ratio_label.config(text=f"Progress ratio: {round((i+1)*100/len(self.xml_files))}%")
     self.update()

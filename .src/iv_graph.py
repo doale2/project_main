@@ -34,19 +34,14 @@ def plot_iv(ax1, iv_data):
                  fontsize=9)
 
 
-def save_png_iv(xml):
-    # 분석 시간
-    current_datetime = datetime.now()
-    formatted_datetime = current_datetime.strftime("%Y.%m.%d-%H%M%S")
+def save_png_iv(xml, formatted_datetime):
     # 파일 경로 추출하여 저장
     directory_path = os.path.dirname(xml)
     directory_path = directory_path.replace("\\", "/")
     directory_path = directory_path.replace("./dat", "")
+    save_directory = f'./res/{formatted_datetime}/{directory_path}'
     # 파일 명만 가져옴
     filename = os.path.basename(xml)
     filename = os.path.splitext(filename)[0]
-    # 폴더를 만들고 그곳에 저장
-    save_directory = f'./res/{formatted_datetime}/{directory_path}'
-    os.makedirs(save_directory, exist_ok=True)
     plt.savefig(f'{save_directory}/{filename}.png', dpi=300)
 
