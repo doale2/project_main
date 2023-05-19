@@ -3,7 +3,6 @@ from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 from iv_fitting import iv_fitting
 import os
-from datetime import datetime
 
 
 def parsing_iv_data(xml):
