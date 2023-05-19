@@ -52,3 +52,18 @@ def save_csv(xml):
                        'I at 1V [A]': iv_data['current'][-1]})
 
     df.to_csv(f'./res/csv_files/{os.path.basename(xml)}.csv', index=False)
+
+
+#csv파일을 하나로 병합하는 코드
+
+import pandas as pd
+from datetime import datetime
+import glob
+
+current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+csv_files = glob.glob('./res/csv_files/*.csv')
+
+combined_df = pd.concat([pd.read_csv(file) for file in csv_files])
+
+combined_df.to_csv(f'./res/csv_file_{current_datetime}.csv', index=False)
