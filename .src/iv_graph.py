@@ -3,6 +3,7 @@ from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 from iv_fitting import iv_fitting
 import os
+from datetime import datetime
 
 
 def parsing_iv_data(xml):
@@ -34,4 +35,18 @@ def plot_iv(ax1, iv_data):
 
 
 def save_png_iv(xml):
-    plt.savefig(f'./res/png_files/{os.path.basename(xml)}.png', dpi=300)
+    # 분석 시간
+    current_datetime = datetime.now()
+    formatted_datetime = current_datetime.strftime("%Y.%m.%d-%H%M%S")
+    # 파일 경로 추출하여 저장
+    directory_path = os.path.dirname(xml)
+    directory_path = directory_path.replace("\\", "/")
+    directory_path = directory_path.replace("./dat", "")
+    # 파일 명만 가져옴
+    filename = os.path.basename(xml)
+    filename = os.path.splitext(filename)[0]
+    # 폴더를 만들고 그곳에 저장
+    save_directory = f'./res/{formatted_datetime}/{directory_path}'
+    os.makedirs(save_directory, exist_ok=True)
+    plt.savefig(f'{save_directory}/{filename}.png', dpi=300)
+

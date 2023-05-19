@@ -63,15 +63,9 @@ def function7(ax6, xml):
 
 
 def analyze_data(self, option_list):
-    # './res/csv_files/' 폴더 내 모든 csv 파일 삭제
-    [os.remove(os.path.join('./res/csv_files/', file)) for file in os.listdir('./res/csv_files/') if file.endswith('.csv')]
-    # './res/png_files/' 폴더 내 모든 png 파일 삭제
-    [os.remove(os.path.join('./res/png_files/', file)) for file in os.listdir('./res/png_files/') if file.endswith('.png')]
-    print(option_list)
-
     for i, xml in enumerate(self.xml_files):
+        self.update()
         ax1, ax2, ax3, ax4, ax5, ax6 = select_analyze_data(option_list)
-
         # data 분석할 것들을 모음
         if 'ax1' in option_list:
             ax1.set_yscale('log', base=10)
@@ -90,8 +84,6 @@ def analyze_data(self, option_list):
 
         handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6)
         save_png_iv(xml)
-        self.update()
         self.progress_bar.step(100/len(self.xml_files))
         self.progress_ratio_label.config(text=f"Progress ratio: {round((i+1)*100/len(self.xml_files))}%")
     self.update()
-
