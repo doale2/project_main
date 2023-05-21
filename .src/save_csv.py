@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as elemTree
 from datetime import datetime
+import numpy as np
 import pandas as pd
 from ts_graph import extract_max_r2_value_ax3
 from iv_fitting import iv_fitting
@@ -39,13 +40,16 @@ def extract_lot_data(xml):
 
 
 def save_csv(xml, formatted_datetime):
+    import warnings
+    warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
+    username = os.environ.get('USERNAME')
     iv_data = parsing_iv_data(xml)
     y_fit = iv_fitting(iv_data)
     error_flag, max_f, max_r2_TS, max_transmission = extract_max_r2_value_ax3(xml)
     lot, wafer, mask, test, name, date, oper, row, col, analysis_wl = extract_lot_data(xml)
 
     df = pd.DataFrame({'Lot': lot, 'Wafer': wafer, 'Mask': mask, 'TestSite': test, 'Name': name, 'Date': date,
-                       'Script ID': f'process {test[0].split("_")[-1]}', 'Script Version': 0.1, 'Script Owner': 'D',
+                       'Script ID': f'process {test[0].split("_")[-1]}', 'Script Version': 0.1, 'Script Owner': f'D_{[username]}',
                        'Operator': oper, 'Row': row, 'Column': col, 'ErrorFlag': error_flag,
                        'Error description': 'No Error' if error_flag == 0 else 'Ref. spec. Error',
                        'Analysis Wavelength': analysis_wl,

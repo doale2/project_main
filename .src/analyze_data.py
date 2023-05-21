@@ -80,7 +80,6 @@ def analyze_data(self, option_list):
     formatted_datetime = create_res_subfolders()
     for i, xml in enumerate(self.xml_files):
         self.update()
-
         ax1, ax2, ax3, ax4, ax5, ax6 = select_analyze_data(option_list)
         # data 분석할 것들을 모음
         if 'ax1' in option_list:
@@ -99,7 +98,8 @@ def analyze_data(self, option_list):
             function7(ax6, xml)
 
         handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6)
-        save_png_iv(xml, formatted_datetime)
+        if any(ax in option_list for ax in ['ax1', 'ax2', 'ax3', 'ax4', 'ax5']):
+            save_png_iv(xml, formatted_datetime)
 
         self.progress_bar.step(100/len(self.xml_files))
         self.progress_ratio_label.config(text=f"Progress ratio: {round((i+1)*100/len(self.xml_files))}%")
