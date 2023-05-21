@@ -99,7 +99,7 @@ def flat_peak_fitting(ax5, ax6, xml):
             model = Model(fitting_consider_voltage, independent_vars=['wavelength'], param_names=['n_eff_0', 'del_n_eff'])
 
             # Set the initial parameter values and boundaries
-            model.set_param_hint('n_eff_0', value=extract_n_eff(xml))
+            model.set_param_hint('n_eff_0', value=extract_n_eff(xml), vary=False)
             model.set_param_hint('del_n_eff', value=0.0)
 
             # Fit the model to the data
