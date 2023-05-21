@@ -23,10 +23,10 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6):
          'ax5_ticksize': 14,
          'ax5_legendloc': 'lower center', 'ax5_legendncol': 3, 'ax5_legendsize': 8},
 
-        {'ax6_title': 'Fitting FFT', 'ax6_titlesize': 11,
-         'ax6_xlabel': 'Wavelength [nm]', 'ax6_ylabel': 'Intensity [a.u.]', 'ax6_size': 9,
+        {'ax6_title': 'n_V_curve', 'ax6_titlesize': 11,
+         'ax6_xlabel': 'Voltage [V]', 'ax6_ylabel': 'n_eff', 'ax6_size': 9,
          'ax6_ticksize': 14,
-         'ax6_legendloc': 'lower center', 'ax6_legendncol': 3, 'ax6_legendsize': 8}
+         'ax6_legendloc': 'lower center', 'ax6_legendncol': 1, 'ax6_legendsize': 8}
     ]
 
     for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6]):

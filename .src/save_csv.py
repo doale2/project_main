@@ -45,7 +45,7 @@ def save_csv(xml, formatted_datetime):
     username = os.environ.get('USERNAME')
     iv_data = parsing_iv_data(xml)
     y_fit = iv_fitting(iv_data)
-    error_flag, max_f, max_r2_TS, max_transmission = extract_max_r2_value_ax3(xml)
+    max_i, error_flag, max_f, max_r2_TS, max_transmission = extract_max_r2_value_ax3(xml)
     lot, wafer, mask, test, name, date, oper, row, col, analysis_wl = extract_lot_data(xml)
 
     df = pd.DataFrame({'Lot': lot, 'Wafer': wafer, 'Mask': mask, 'TestSite': test, 'Name': name, 'Date': date,
