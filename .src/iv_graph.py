@@ -33,5 +33,14 @@ def plot_iv(ax1, iv_data):
                  fontsize=9)
 
 
-def save_png_iv(xml):
-    plt.savefig(f'./res/png_files/{os.path.basename(xml)}.png', dpi=300)
+def save_png_iv(xml, formatted_datetime):
+    # 파일 경로 추출하여 저장
+    directory_path = os.path.dirname(xml)
+    directory_path = directory_path.replace("\\", "/")
+    directory_path = directory_path.replace("./dat", "")
+    save_directory = f'./res/{formatted_datetime}/{directory_path}'
+    # 파일 명만 가져옴
+    filename = os.path.basename(xml)
+    filename = os.path.splitext(filename)[0]
+    plt.savefig(f'{save_directory}/{filename}.png', dpi=300)
+
