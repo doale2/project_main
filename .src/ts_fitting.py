@@ -70,7 +70,6 @@ def flat_peak_fitting(ax5, ax6, xml):
     max_i, error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
     cmap = plt.colormaps.get_cmap('jet')
     del_n_list, v_list = [], []
-    print('n_eff_0V:', extract_n_eff(xml))
     for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
         if i != 6:
             color = cmap(i / 6)
@@ -109,4 +108,3 @@ def flat_peak_fitting(ax5, ax6, xml):
             v_list.append(wavelength_sweep.get('DCBias'))
             ax5.plot(wavelength, result.best_fit, color=color, label=wavelength_sweep.get('DCBias') + ' V fit')
     ax6.plot(v_list, del_n_list, label='n_V_curve')
-
