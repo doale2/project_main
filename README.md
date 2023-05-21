@@ -14,7 +14,7 @@
 - [Enquiry](#enquiry)  
 
 *****
- 
+
 ## Overview   
 *Wafer-scale data* processing refers to a technology that efficiently manages and utilizes 
 vast amounts of data of elements in each die at the wafer scale. 
@@ -27,7 +27,7 @@ provided by the customer, it also shows and saves information in graphs and csv 
 
 Customers can select and analyze **files, lots, wafers, column&row** which they want.
 
- 
+
 ### What you can analyze
 
 **IV graph**
@@ -36,7 +36,7 @@ A graph that represents the voltage-current curve of a semiconductor device.
 This graph is used to analyze the electrical characteristics of the device.
 
 **IV fitting**
- 
+
 The process of mathematically modeling the characteristics of a device 
 based on the data obtained from the IV graph. 
 We selected 8th function to fit it.
@@ -85,27 +85,27 @@ _In HANYANG University ERICA Campus_
 
 
 - **Jungwan Noh**
-
+  
   <img src="https://github.com/PE02teamD/project_main/assets/127360946/742c4597-5dca-40e8-8199-88ec694cd15a" width="195" height="240"/>
 
   **A principal developer👑**
-
+  
   Implemented Tkinter GUI
-
+  
   Extracted to XML files
 
   Saved to CSV, PNG files 
-
+  
   Graph fitting
 
   Modulization python files
-
+  
   [npower220@hanyang.ac.kr](npower220@hanyang.ac.kr)
 
 <br/>
 
 - **Kyusik Kim**
-
+ 
   <img src="https://github.com/PE02teamD/project_main/assets/127360946/41083b56-6cdd-48a7-b609-101b4abdb7a1" width="190" height="250"/>
 
   Diversification of data file selection
@@ -121,9 +121,9 @@ _In HANYANG University ERICA Campus_
   implemented I-V Curve graph
 
   implemented transmission spectra graph
-
+  
   [govldjsgovl@hanyang.ac.kr](govldjsgovl@hanyang.ac.kr)
-
+ 
  <br/>
 
 - **Dohyeon Lee**
