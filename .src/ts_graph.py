@@ -26,10 +26,8 @@ def ts_graph(ax2, xml):
 
     cmap, a = plt.colormaps.get_cmap('jet'), 0
     # Extract Wavelength and dB data
-    for wavelength_sweep in root.iter('WavelengthSweep'):
-        # Choose a color for the scatter plot based on the iteration index
-        a += 1
-        color = cmap(a / 7)
+    for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
+        color = cmap(i / 6)
         # Make it a dict for easier handling
         wavelength_data = {'wavelength': [], 'measured_transmission': []}
         # Get data from each element
@@ -38,7 +36,7 @@ def ts_graph(ax2, xml):
         wavelength_data['wavelength'].extend(wavelength)
         wavelength_data['measured_transmission'].extend(measured_transmission)
         # Create a scatter plot using the data
-        ax2.plot('wavelength', 'measured_transmission', data=wavelength_data, color=color,
+        ax2.plot('wavelength', 'measured_transmission', data=wavelength_data, color=color if i != 6 else 'black',
                  label=wavelength_sweep.get('DCBias') + ' V'
                  if wavelength_sweep != list(root.iter('WavelengthSweep'))[-1] else '')
 
@@ -64,7 +62,7 @@ def ts_fitting_graph(ax3, xml):
 def extract_max_r2_value_ax3(xml):
     root, wavelength_data = parsing_ts_ref_data(xml)
     r2_list = []
-    max_r2 = 0
+    max_r2, max_i = 0, 0
 
     for i in range(2, 9):
         fp = np.polyfit(wavelength_data['wavelength'], wavelength_data['measured_transmission'], i)
@@ -72,6 +70,7 @@ def extract_max_r2_value_ax3(xml):
         r2 = r2_score(wavelength_data['measured_transmission'], f(wavelength_data['wavelength']))
         r2_list.append(r2)
         if r2_list[i - 2] > max_r2:
+            max_i = i + 2
             max_f = f
             max_r2 = r2
             max_transmission = max(f(wavelength_data['wavelength']))
@@ -81,19 +80,19 @@ def extract_max_r2_value_ax3(xml):
     else:
         error_flag = 1
 
-    return error_flag, max_f, max_r2, max_transmission
+    return max_i, error_flag, max_f, max_r2, max_transmission
 
 
 def flat_ts_graph(ax4, xml):
     import warnings
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     root, wavelength_data = parsing_ts_ref_data(xml)
-    error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
+    max_i, error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
 
     cmap = plt.colormaps.get_cmap('jet')
     # Iterate over the first 6 WavelengthSweep elements
     for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
-        color = cmap(i / 7)
+        color = cmap(i / 6)
         flat_wavelength_data = {'wavelength': [], 'flat_measured_transmission': []}
         # Get data from each element
         wavelength = list(map(float, wavelength_sweep.find('L').text.split(',')))
@@ -102,9 +101,9 @@ def flat_ts_graph(ax4, xml):
         flat_wavelength_data['wavelength'].extend(wavelength)
         flat_wavelength_data['flat_measured_transmission'].extend(flat_measured_transmission)
         # Plot ax4 using the data
-        ax4.plot('wavelength', 'flat_measured_transmission', data=flat_wavelength_data, color=color,
+        ax4.plot('wavelength', 'flat_measured_transmission', data=flat_wavelength_data, color=color if i != 6 else 'black',
                  label=wavelength_sweep.get('DCBias') + ' V'
-                 if wavelength_sweep != list(root.iter('WavelengthSweep'))[-1] else '')
+                 if wavelength_sweep != list(root.iter('WavelengthSweep'))[-1] else f'{max_i}th fit')
 
 
 def flat_ts_graph_ax5(ax5, xml):
@@ -113,7 +112,7 @@ def flat_ts_graph_ax5(ax5, xml):
 
     cmap = plt.colormaps.get_cmap('jet')
     for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
-        color = cmap(i / 7)
+        color = cmap(i / 6)
         # Make it a dict for easier handling
         wavelength_data = {'wavelength': [], 'measured_transmission': []}
         # Get data from each element
