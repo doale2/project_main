@@ -34,7 +34,7 @@ def extract_n_eff(xml):
             wavelength_data['wavelength'].extend(wavelength)
             wavelength_data['measured_transmission'].extend(measured_transmission)
             # Extract peak
-            peaks_index, _ = find_peaks(wavelength_data['measured_transmission'], prominence=5)
+            peaks_index, _ = find_peaks(wavelength_data['measured_transmission'], prominence=6)
             x_peaks, y_peaks = [], []
             for index in peaks_index:
                 x_peaks.append(wavelength_data['wavelength'][index])
@@ -93,10 +93,11 @@ def flat_peak_fitting(ax5, ax6, xml):
             f = np.poly1d(fp)  # Equation으로 만듬
             wavelength_data['measured_transmission'] -= f(wavelength)
             wavelength_data['measured_transmission'] = dbm_to_linear(wavelength_data['measured_transmission'])
-            ax5.plot('wavelength', 'measured_transmission', data=wavelength_data, color=color,
-                     label=wavelength_sweep.get('DCBias') + ' V')
+            ax5.scatter('wavelength', 'measured_transmission', data=wavelength_data, color=color, s=0.01, alpha=0.9,
+                        label=wavelength_sweep.get('DCBias') + ' V')
 
-            model = Model(fitting_consider_voltage, independent_vars=['wavelength'], param_names=['n_eff_0', 'del_n_eff'])
+            model = Model(fitting_consider_voltage, independent_vars=['wavelength'],
+                          param_names=['n_eff_0', 'del_n_eff'])
 
             # Set the initial parameter values and boundaries
             model.set_param_hint('n_eff_0', value=extract_n_eff(xml), vary=False)
@@ -106,5 +107,11 @@ def flat_peak_fitting(ax5, ax6, xml):
             result = model.fit(wavelength_data['measured_transmission'], wavelength=wavelength)
             del_n_list.append(result.best_values.get('del_n_eff'))
             v_list.append(wavelength_sweep.get('DCBias'))
-            ax5.plot(wavelength, result.best_fit, color=color, label=wavelength_sweep.get('DCBias') + ' V fit')
-    ax6.plot(v_list, del_n_list, label='n_V_curve')
+            ax5.plot(wavelength, result.best_fit, color=color, linestyle=':',
+                     label=wavelength_sweep.get('DCBias') + ' V fit', lw=1)
+    v_list = list(map(float, v_list))
+    del_n_list = list(map(float, del_n_list))
+    ax6.scatter(v_list, del_n_list, label='n_V_curve')
+    fp_ax6 = np.polyfit(v_list, del_n_list, 2)  # 2차 근사
+    f = np.poly1d(fp_ax6)  # Equation으로 만듬
+    ax6.plot(v_list, list(f(v_list)), color='r', linestyle='--', lw=1, label='2th n_V fit')
