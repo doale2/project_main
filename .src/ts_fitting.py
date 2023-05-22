@@ -1,23 +1,75 @@
 import numpy as np
 from lmfit import Model
-from scipy.optimize import curve_fit
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
 from ts_graph import parsing_ts_ref_data, extract_max_r2_value_ax3
 
 
 def dbm_to_linear(dBm):
-    linear = 10 ** (dBm/10)
+    linear = 10 ** (dBm / 10) / 1000
     return linear
 
 
-def flat_peak(ax5, xml):
+def fitting_extract_n_eff(wavelength, n_eff):
+    I_0 = 0.001
+    subtraction_l2_l1 = 40000
+    return I_0 * (np.sin(np.pi * subtraction_l2_l1 * n_eff / wavelength)) ** 2
+
+
+def extract_n_eff(xml):
     import warnings
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     root, wavelength_data = parsing_ts_ref_data(xml)
-    error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
-    cmap = plt.colormaps.get_cmap('jet')
+    max_i, error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
 
+    for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
+        if i == 4:
+            # Make it a dict for easier handling
+            wavelength_data = {'wavelength': [], 'measured_transmission': []}
+            # Get data from each element
+            wavelength = list(map(float, wavelength_sweep.find('L').text.split(',')))
+            measured_transmission = list(map(float, wavelength_sweep.find('IL').text.split(',')))
+            # Subtract y2
+            measured_transmission -= max_f(wavelength)
+            wavelength_data['wavelength'].extend(wavelength)
+            wavelength_data['measured_transmission'].extend(measured_transmission)
+            # Extract peak
+            peaks_index, _ = find_peaks(wavelength_data['measured_transmission'], prominence=5)
+            x_peaks, y_peaks = [], []
+            for index in peaks_index:
+                x_peaks.append(wavelength_data['wavelength'][index])
+                y_peaks.append(wavelength_data['measured_transmission'][index])
+
+            fp = np.polyfit(x_peaks, y_peaks, 1)  # 극댓값들로 1차 근사
+            f = np.poly1d(fp)  # Equation으로 만듬
+
+            wavelength_data['measured_transmission'] -= f(wavelength)
+            wavelength_data['measured_transmission'] = dbm_to_linear(wavelength_data['measured_transmission'])
+            # Fitting 0V for extracting n_eff
+            model = Model(fitting_extract_n_eff, independent_vars=['wavelength'], param_names=['n_eff'])
+
+            # Set the initial parameter values and boundaries
+            model.set_param_hint('n_eff', value=4.2, min=0.0, max=10.0)
+
+            # Fit the model to the data
+            result = model.fit(wavelength_data['measured_transmission'], wavelength=wavelength)
+            return result.best_values.get('n_eff')
+
+
+def fitting_consider_voltage(wavelength, n_eff_0, del_n_eff):
+    I_0 = 0.001
+    l = 500000
+    subtraction_l2_l1 = 40000
+    return I_0 * (np.sin(np.pi / wavelength * (subtraction_l2_l1 * n_eff_0 + l * del_n_eff))) ** 2
+
+
+def flat_peak_fitting(ax5, ax6, xml):
+    import warnings
+    warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
+    root, wavelength_data = parsing_ts_ref_data(xml)
+    max_i, error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
+    cmap = plt.colormaps.get_cmap('jet')
+    del_n_list, v_list = [], []
     for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
         if i != 6:
             color = cmap(i / 6)
@@ -39,78 +91,20 @@ def flat_peak(ax5, xml):
 
             fp = np.polyfit(x_peaks, y_peaks, 1)  # 극댓값들로 1차 근사
             f = np.poly1d(fp)  # Equation으로 만듬
-
             wavelength_data['measured_transmission'] -= f(wavelength)
             wavelength_data['measured_transmission'] = dbm_to_linear(wavelength_data['measured_transmission'])
             ax5.plot('wavelength', 'measured_transmission', data=wavelength_data, color=color,
                      label=wavelength_sweep.get('DCBias') + ' V')
 
+            model = Model(fitting_consider_voltage, independent_vars=['wavelength'], param_names=['n_eff_0', 'del_n_eff'])
 
-def plot_fitting_graph(ax6, xml):
-    import warnings
-    warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
-    root, wavelength_data = parsing_ts_ref_data(xml)
-    error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
-    cmap = plt.colormaps.get_cmap('jet')
+            # Set the initial parameter values and boundaries
+            model.set_param_hint('n_eff_0', value=extract_n_eff(xml), vary=False)
+            model.set_param_hint('del_n_eff', value=0.0)
 
-    for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
-        if i == 4:
-            color = cmap(i / 6)
-            # Make it a dict for easier handling
-            wavelength_data = {'wavelength': [], 'measured_transmission': []}
-            # Get data from each element
-            wavelength = list(map(float, wavelength_sweep.find('L').text.split(',')))
-            measured_transmission = list(map(float, wavelength_sweep.find('IL').text.split(',')))
-            # Subtract y2
-            measured_transmission -= max_f(wavelength)
-            wavelength_data['wavelength'].extend(wavelength)
-            wavelength_data['measured_transmission'].extend(measured_transmission)
-            # Extract peak
-            peaks_index, _ = find_peaks(wavelength_data['measured_transmission'], prominence=5)
-            x_peaks, y_peaks = [], []
-            for index in peaks_index:
-                x_peaks.append(wavelength_data['wavelength'][index])
-                y_peaks.append(wavelength_data['measured_transmission'][index])
-
-            fp = np.polyfit(x_peaks, y_peaks, 1)  # 극댓값들로 1차 근사
-            f = np.poly1d(fp)  # Equation으로 만듬
-
-            wavelength_data['measured_transmission'] -= f(wavelength)
-            wavelength_data['measured_transmission'] = dbm_to_linear(wavelength_data['measured_transmission'])
-            ax6.plot('wavelength', 'measured_transmission', data=wavelength_data, color=color, lw=1,
-                     label=wavelength_sweep.get('DCBias') + ' V')
-
-            wavelength_data['measured_transmission'] += 0.5 * np.random.randn(len(wavelength))
-
-            bounds = ([0.0, 0.0], [np.inf, np.inf])
-
-            popt, pcov = curve_fit(fitting_extract_n_eff, wavelength, wavelength_data['measured_transmission'], bounds=bounds, maxfev=10000)
-
-            y_fit = fitting_extract_n_eff(wavelength, *popt)
-
-            # model = Model(fitting_extract_n_eff, independent_vars=['wavelength'], param_names=['I_0', 'n_eff'])
-            #
-            # # Set the initial parameter values and boundaries
-            # model.set_param_hint('I_0', value=0.5, min=-1.0, max=1.0)
-            # model.set_param_hint('n_eff', value=2.6, min=0.0, max=10.0)
-            #
-            # # Fit the model to the data
-            # result = model.fit(wavelength_data['measured_transmission'], wavelength=wavelength)
-            ax6.plot(wavelength_data['wavelength'], y_fit, linestyle='-', lw=2, color='aqua',
-                     label=wavelength_sweep.get('DCBias') + 'best-fit')
-            ax6.annotate(f"I_0: {popt[0]}, n_eff: {popt[1]}", xy=(1580, 1.0), ha='right',
-                         fontsize=8)
-
-
-def fitting_extract_n_eff(wavelength, I_0, n_eff):
-    return I_0 * (np.sin(np.pi * 40 * n_eff / wavelength)) ** 2
-
-
-# def fitting_y3(I_0, wavelength, l, n_eff, del_n_eff):
-#      return I_0 * (np.sin(np.pi / wavelength * (40 * n_eff + l * del_n_eff))) ** 2
-
-
-# # Approach the path
-# rootDir = "C:/Users/노정완/Desktop/대학교/23나노 1학기 PDF/공학프로그래밍2/data set/"  # Input your path
-# fname = 'HY202103_D07_(0,0)_LION1_DCM_LMZC.xml'  # Input file name
-# xml = rootDir + fname
+            # Fit the model to the data
+            result = model.fit(wavelength_data['measured_transmission'], wavelength=wavelength)
+            del_n_list.append(result.best_values.get('del_n_eff'))
+            v_list.append(wavelength_sweep.get('DCBias'))
+            ax5.plot(wavelength, result.best_fit, color=color, label=wavelength_sweep.get('DCBias') + ' V fit')
+    ax6.plot(v_list, del_n_list, label='n_V_curve')

@@ -7,18 +7,21 @@ def choose_analysis_scale(self):
     lot_set = set()
     wafer_set = set()
     coordinate_set = set()
+    date_set = set()
     # dat 파일의 모든 요소에 대해 root, directories, files를 구함
     for (root, directories, files) in os.walk('./dat'):
         # file에 대해서만
         for file in files:
-            if '.xml' in file: # .keep같은 파일 걸러내기
+            if '.xml'and 'LMZ' in file:  # .keep같은 파일 걸러내기, LMZ파일만
                 file_split = file.split(sep='_', maxsplit=3)
                 lot_set.add(file_split[0])
                 wafer_set.add(file_split[1])
                 coordinate_set.add(file_split[2])
+                root_split = root.split(sep='\\')
+                date_set.add(root_split[3])
                 file_path = os.path.join(root, file)
                 # 키:파일경로, 값:[lot, wafer, coordinate]인 dict
-                self.choose_dict[file_path] = [file_split[0], file_split[1], file_split[2]]
+                self.choose_dict[file_path] = [file_split[0], file_split[1], file_split[2], root_split[3]]
 
     # list로 변환, 오름차순 정렬
     self.lot_list = list(lot_set)
@@ -27,6 +30,8 @@ def choose_analysis_scale(self):
     self.wafer_list.sort()
     self.coordinate_list = list(coordinate_set)
     self.coordinate_list.sort()
+    self.date_list = list(date_set)
+    self.lot_list.sort()
 
     # gui에 표시하기
     for lot in self.lot_list:
@@ -37,3 +42,6 @@ def choose_analysis_scale(self):
 
     for coordinate in self.coordinate_list:
         self.select_listbox3.insert(tk.END, coordinate)
+
+    for date in self.date_list:
+        self.select_listbox4.insert(tk.END, date)

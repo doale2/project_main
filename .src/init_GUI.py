@@ -11,25 +11,25 @@ def init_GUI(self):
     method_var6 = tk.IntVar()
 
     self.title("Wafer Analysis")
-    self.geometry("465x500")
+    self.geometry("575x450")
 
     self.set_data_folder_button = tk.Button(self, text="Set scale", command=self.save_choosed_data)
     self.set_data_folder_button.grid(row=3, column=0, padx=5, pady=5, sticky="w")
 
     self.num_files_label = tk.Label(self, text="Number of Files: 0")
-    self.num_files_label.grid(row=3, column=2, padx=5, pady=5, sticky="e")
+    self.num_files_label.grid(row=3, column=3, padx=5, pady=5, sticky="e")
 
     self.show_selected_files_button = tk.Button(self, text="Show Selected Files", command=self.show_selected_files)
     self.show_selected_files_button.grid(row=4, column=0, padx=5, pady=5, sticky="w")
 
     self.clear_selected_files_button = tk.Button(self, text="Clear Files", command=self.clear_selected_files)
-    self.clear_selected_files_button.grid(row=4, column=2, padx=5, pady=5, sticky="e")
+    self.clear_selected_files_button.grid(row=4, column=3, padx=5, pady=5, sticky="e")
 
     self.progress_ratio_label = tk.Label(self, text="Progress ratio:  0%")
-    self.progress_ratio_label.grid(row=6, column=2, padx=5, pady=5, sticky="e")
+    self.progress_ratio_label.grid(row=6, column=3, padx=5, pady=5, sticky="e")
 
-    self.progress_bar = ttk.Progressbar(self, length=110,orient="horizontal", mode="determinate")
-    self.progress_bar.grid(row=7, column=2, padx=5, pady=5, sticky="e")
+    self.progress_bar = ttk.Progressbar(self, length=110, orient="horizontal", mode="determinate")
+    self.progress_bar.grid(row=7, column=3, padx=5, pady=5, sticky="e")
 
     self.analyze_button = tk.Button(self, text="Analyze", command=lambda: self.analyze_data([
         'ax1' if method_var1.get() else None,
@@ -65,14 +65,18 @@ def init_GUI(self):
     self.lot_list = []
     self.wafer_list = []
     self.coordinate_list = []
+    self.date_list = []
 
-    self.select_listbox1 = tk.Listbox(self, width=20, height=5, selectmode='multiple', exportselection=0)
+    self.select_listbox1 = tk.Listbox(self, width=18, height=5, selectmode='multiple', exportselection=0)
     self.select_listbox1.grid(row=1, column=0, padx=5, pady=5)
 
-    self.select_listbox2 = tk.Listbox(self, width=20, height=5, selectmode='multiple', exportselection=0)
+    self.select_listbox2 = tk.Listbox(self, width=18, height=5, selectmode='multiple', exportselection=0)
     self.select_listbox2.grid(row=1, column=1, padx=5, pady=5)
 
-    self.select_listbox3 = tk.Listbox(self, width=20, height=5, selectmode='multiple', exportselection=0)
+    self.select_listbox3 = tk.Listbox(self, width=18, height=5, selectmode='multiple', exportselection=0)
     self.select_listbox3.grid(row=1, column=2, padx=5, pady=5)
+
+    self.select_listbox4 = tk.Listbox(self, width=18, height=5, selectmode='multiple', exportselection=0)
+    self.select_listbox4.grid(row=1, column=3, padx=5, pady=5)
 
     self.choose_analysis_scale()
