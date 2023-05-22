@@ -117,4 +117,3 @@ def flat_ts_graph(ax4, xml):
             fp = np.polyfit(x_peaks, y_peaks, 1)  # 극댓값들로 1차 근사
             f = np.poly1d(fp)  # Equation으로 만듬
             ax4.plot(wavelength, f(wavelength), color=color, linestyle='--', label=wavelength_sweep.get('DCBias') + ' V peak fit', lw=1)
-
