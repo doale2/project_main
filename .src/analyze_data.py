@@ -1,4 +1,5 @@
 from tkinter import messagebox
+from matplotlib import pyplot as plt
 from select_analyze_data import select_analyze_data
 from iv_graph import parsing_iv_data, plot_iv, save_png_iv
 from handle_subplot import handle_subplot
@@ -95,7 +96,7 @@ def analyze_data(self, option_list):
         handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6)
         if any(ax in option_list for ax in ['ax1', 'ax2', 'ax3', 'ax4', 'ax5']):
             save_png_iv(xml, formatted_datetime)
-
+        plt.close('all')
         self.progress_bar.step(100/len(self.xml_files))
         self.progress_ratio_label.config(text=f"Progress ratio: {round((i+1)*100/len(self.xml_files))}%")
     self.update()
