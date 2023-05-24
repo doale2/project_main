@@ -43,4 +43,3 @@ def save_png_iv(xml, formatted_datetime):
     filename = os.path.basename(xml)
     filename = os.path.splitext(filename)[0]
     plt.savefig(f'{save_directory}/{filename}.png', dpi=300)
-
