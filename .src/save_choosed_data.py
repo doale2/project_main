@@ -1,4 +1,5 @@
 from itertools import product
+from tkinter import messagebox
 
 
 def save_choosed_data(self):
@@ -43,3 +44,5 @@ def save_choosed_data(self):
     self.xml_files = select_path_list
 
     self.num_files_label.config(text=f"Number of Files: {len(self.xml_files)}")
+    if len(self.xml_files) == 0:
+        messagebox.showerror("Error", 'Please select XML files again')

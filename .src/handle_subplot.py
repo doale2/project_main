@@ -16,12 +16,12 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6):
         {'ax4_title': 'Flat Transmission spectra - as measured', 'ax4_titlesize': 11,
          'ax4_xlabel': 'Wavelength [nm]', 'ax4_ylabel': 'Flat Measured_transmission [dB]', 'ax4_size': 9,
          'ax4_ticksize': 14,
-         'ax4_legendloc': 'lower center', 'ax4_legendncol': 3, 'ax4_legendsize': 8},
+         'ax4_legendloc': 'lower center', 'ax4_legendncol': 3, 'ax4_legendsize': 6},
 
         {'ax5_title': 'Flat Flat TS', 'ax5_titlesize': 11,
          'ax5_xlabel': 'Wavelength [nm]', 'ax5_ylabel': 'Intensity [a.u.]', 'ax5_size': 9,
          'ax5_ticksize': 14,
-         'ax5_legendloc': 'lower center', 'ax5_legendncol': 3, 'ax5_legendsize': 8},
+         'ax5_legendloc': 'lower center', 'ax5_legendncol': 3, 'ax5_legendsize': 6},
 
         {'ax6_title': 'n_V_curve', 'ax6_titlesize': 11,
          'ax6_xlabel': 'Voltage [V]', 'ax6_ylabel': 'del_n_eff', 'ax6_size': 9,
