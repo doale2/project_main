@@ -97,8 +97,6 @@ def analyze_data(self, option_list):
         if any(ax in option_list for ax in ['ax1', 'ax2', 'ax3', 'ax4', 'ax5']):
             save_png_iv(xml, formatted_datetime)
         plt.close('all')
-        self.progress_value.set((i+1)*100/len(self.xml_files))
-        self.progress_bar.update()
-        print((i+1)*100/len(self.xml_files))
+        self.progress_bar.step(100/len(self.xml_files))
         self.progress_ratio_label.config(text=f"Progress ratio: {round((i+1)*100/len(self.xml_files))}%")
     self.update()

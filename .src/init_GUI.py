@@ -28,8 +28,7 @@ def init_GUI(self):
     self.progress_ratio_label = tk.Label(self, text="Progress ratio:  0%")
     self.progress_ratio_label.grid(row=6, column=3, padx=5, pady=5, sticky="e")
 
-    self.progress_value = tk.DoubleVar()
-    self.progress_bar = ttk.Progressbar(self, length=110, orient="horizontal", mode="determinate", variable=self.progress_value)
+    self.progress_bar = ttk.Progressbar(self, length=110, orient="horizontal", mode="determinate")
     self.progress_bar.grid(row=7, column=3, padx=5, pady=5, sticky="e")
 
     self.analyze_button = tk.Button(self, text="Analyze", command=lambda: self.analyze_data([
