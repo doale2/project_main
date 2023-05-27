@@ -36,12 +36,13 @@ def choose_analysis_scale(self):
     # gui에 표시하기
     for lot in self.lot_list:
         self.select_listbox1.insert(tk.END, lot)
-
+        self.select_listbox1.configure(font=('Helvetica', 24))
     for wafer in self.wafer_list:
         self.select_listbox2.insert(tk.END, wafer)
-
+        self.select_listbox2.configure(font=('Helvetica', 24))
     for coordinate in self.coordinate_list:
         self.select_listbox3.insert(tk.END, coordinate)
-
+        self.select_listbox3.configure(font=('Helvetica', 24))
     for date in self.date_list:
         self.select_listbox4.insert(tk.END, date)
+        self.select_listbox4.configure(font=('Helvetica', 24))
