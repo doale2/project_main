@@ -1,5 +1,4 @@
 from tkinter import messagebox
-from matplotlib import pyplot as plt
 from select_analyze_data import select_analyze_data
 from iv_graph import parsing_iv_data, plot_iv, save_png_iv
 from handle_subplot import handle_subplot
@@ -17,9 +16,11 @@ def analyze_consequence(self, option_list):
             messagebox.showerror("Error", "Please select at least one analysis method.")
             return
         else:
+            self.progress_bar.start(100)
             analyze_data(self, option_list)
+            self.progress_bar.stop()
             messagebox.showinfo("Done!", "Data analysis is complete.")
-            self.progress_ratio_label.configure(text="Progress ratio:  0%")
+            self.progress_ratio_label.config(text="Progress ratio:  0%")
     else:
         messagebox.showerror("Error", "please select at least one xml files")
 
@@ -75,22 +76,26 @@ def analyze_data(self, option_list):
     formatted_datetime = create_res_subfolders()
     for i, xml in enumerate(self.xml_files):
         self.update()
-        ax1, ax2, ax3, ax4, ax5, ax6 = select_analyze_data()
-        # data 분석
-        if 'csv' in option_list:
-            function5(xml, formatted_datetime)
-        if 'png' in option_list:
+        ax1, ax2, ax3, ax4, ax5, ax6 = select_analyze_data(option_list)
+        # data 분석할 것들을 모음
+        if 'ax1' in option_list:
             ax1.set_yscale('log', base=10)
             function1(ax1, xml)
+        if 'ax2' in option_list:
             function2(ax2, xml)
+        if 'ax3' in option_list:
             function3(ax3, xml)
+        if 'ax4' in option_list:
             function4(ax4, xml)
+        if 'save_csv' in option_list:
+            function5(xml, formatted_datetime)
+        if 'ax5' in option_list:
             function6(ax5, ax6, xml)
-            handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6)
+
+        handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6)
+        if any(ax in option_list for ax in ['ax1', 'ax2', 'ax3', 'ax4', 'ax5']):
             save_png_iv(xml, formatted_datetime)
 
-        plt.close('all')
-        self.progress_value.set((i + 1) / len(self.xml_files))
-        self.progress_bar.update_idletasks()
-        self.progress_ratio_label.configure(text=f"Progress ratio: {round(100* self.progress_value.get(), 2)}%")
+        self.progress_bar.step(100/len(self.xml_files))
+        self.progress_ratio_label.config(text=f"Progress ratio: {round((i+1)*100/len(self.xml_files))}%")
     self.update()
