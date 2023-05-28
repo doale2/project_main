@@ -11,7 +11,7 @@ def init_GUI(self):
 
     # 창 생성
     self.title("Wafer Analysis")
-    self.geometry(f"{1100}x{700}")
+    self.geometry(f"{1050}x{700}")
 
     # configure grid layout (4x4)
     self.grid_columnconfigure(1, weight=1)
@@ -73,7 +73,7 @@ def init_GUI(self):
     self.progress_ratio_label.grid(row=3, column=1, padx=30, pady=0, sticky="ws")
     self.progress_bar = customtkinter.CTkProgressBar(self, determinate_speed=0, mode="determinate",
                                                      variable=self.progress_value)
-    self.progress_bar.grid(row=4, column=1, columnspan=2, padx=20, pady=20, sticky="nsew")
+    self.progress_bar.grid(row=4, column=1, columnspan=2, padx=20, pady=(0, 20), sticky="nsew")
 
     self.choose_dict = {}
     self.lot_list = []
@@ -86,27 +86,35 @@ def init_GUI(self):
     self.select_listbox1 = tk.Listbox(self.tabview.tab("Lot ID"), width=30, height=15, selectmode='multiple',
                                       exportselection=0)
     self.select_listbox1.grid(row=1, column=0, padx=5, pady=5)
+    self.select_listbox1.configure(background='#F9F9FA')
 
     self.select_listbox2 = tk.Listbox(self.tabview.tab("Wafer ID"), width=30, height=15, selectmode='multiple',
                                       exportselection=0)
     self.select_listbox2.grid(row=1, column=0, padx=5, pady=5)
+    self.select_listbox2.configure(background='#F9F9FA')
 
     self.select_listbox3 = tk.Listbox(self.tabview.tab("Location"), width=30, height=15, selectmode='multiple',
                                       exportselection=0)
     self.select_listbox3.grid(row=1, column=0, padx=5, pady=5)
+    self.select_listbox3.configure(background='#F9F9FA')
 
     self.select_listbox4 = tk.Listbox(self.tabview.tab("Date"), width=30, height=15, selectmode='multiple',
                                       exportselection=0)
     self.select_listbox4.grid(row=1, column=0, padx=5, pady=5)
+    self.select_listbox4.configure(background='#F9F9FA')
 
 
     # selected xml files 표기용 박스
-    self.textbox = customtkinter.CTkTextbox(self, width=250, height=100, state='disabled')
-    self.textbox.grid(row=0, rowspan=3, column=2, columnspan=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
+    self.tabview_2 = customtkinter.CTkTabview(self,state='disabled', bg_color="transparent")
+    self.tabview_2.grid(row=0, rowspan=3, column=2, columnspan=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
+    self.tabview_2.add("Selected XML files")
+    self.textbox = customtkinter.CTkTextbox(self, width=110, height=100, state='disabled')
+    self.textbox.grid(row=0, rowspan=3, column=2, columnspan=2, padx=(30, 30), pady=(70, 30), sticky="nsew")
+
 
     # 오른쪽 아래 analyze button
-    self.analyze_button_1 = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2,
-                                                    text_color=("gray10", "#DCE4EE"), text="analyze",
+    self.analyze_button_1 = customtkinter.CTkButton(master=self, fg_color="#3B8ED0", border_width=0,
+                                                    text_color=("#DCE4EE"), text="analyze",
                                                     command=lambda: self.analyze_data([
                                                         'png' if method_var1.get() else None,
                                                         'csv' if method_var2.get() else None]))
@@ -116,6 +124,6 @@ def init_GUI(self):
     self.main_button_1 = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2,
                                                  text_color=("gray10", "#DCE4EE"), text="exit",
                                                  command=self.exit_app)
-    self.main_button_1.grid(row=4, column=3, padx=(20, 20), pady=(20, 20), sticky="nsew")
+    self.main_button_1.grid(row=4, column=3, padx=(20, 20), pady=(0, 20), sticky="nsew")
 
     self.choose_analysis_scale()
