@@ -1,4 +1,7 @@
+import os
 from itertools import product
+from tkinter import messagebox
+import customtkinter
 
 
 def save_choosed_data(self):
@@ -42,4 +45,16 @@ def save_choosed_data(self):
                 select_path_list.append(key)
     self.xml_files = select_path_list
 
-    self.num_files_label.config(text=f"Number of Files: {len(self.xml_files)}")
+    self.num_files_label.configure(text=f"Number of Files: {len(self.xml_files)}")
+    if len(self.xml_files) == 0:
+        messagebox.showerror("Error", 'Please select XML files again')
+
+
+def show_choosed_data(self):
+    self.textbox.configure(state='normal')
+    self.textbox.delete(1.0, customtkinter.END)
+    # Display selected xml file names
+    for xml_file in self.xml_files:
+        file_name = os.path.basename(xml_file)  # 파일 경로에서 파일 이름만 추출
+        self.textbox.insert(customtkinter.END, file_name + "\n")
+    self.textbox.configure(state='disabled')
