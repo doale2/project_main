@@ -52,10 +52,12 @@ def function4(ax4, xml):
 def function5(xml, formatted_datetime):
     save_csv(xml, formatted_datetime)
 
-
 def function6(ax5, ax6, xml):
     flat_peak_fitting(ax5, ax6, xml)
-
+    if "LMZC" in xml:
+        ax5.set_xlim(1547, 1553)  # X축 범위 설정
+    else:
+        ax5.set_xlim(1307, 1313)  # X축 범위 설정
 def create_res_subfolders():
     # 분석 시간 폴더 생성
     current_datetime = datetime.now()
