@@ -63,7 +63,7 @@ def fitting_consider_voltage(wavelength, n_eff_0, del_n_eff):
     return I_0 * (np.sin(np.pi / wavelength * (subtraction_l2_l1 * n_eff_0 + l * del_n_eff))) ** 2
 
 
-def flat_peak_fitting(ax5, ax6, xml):
+def flat_peak_fitting(ax5, ax6, ax7, xml):
     import warnings
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     root, wavelength_data = parsing_ts_ref_data(xml)
@@ -95,6 +95,8 @@ def flat_peak_fitting(ax5, ax6, xml):
             wavelength_data['measured_transmission'] = dbm_to_linear(wavelength_data['measured_transmission'])
             ax5.scatter('wavelength', 'measured_transmission', data=wavelength_data, color=color, s=0.01, alpha=0.9,
                         label=wavelength_sweep.get('DCBias') + ' V')
+            ax7.scatter('wavelength', 'measured_transmission', data=wavelength_data, color=color, s=0.01, alpha=0.9,
+                        label=wavelength_sweep.get('DCBias') + ' V')
 
             model = Model(fitting_consider_voltage, independent_vars=['wavelength'],
                           param_names=['n_eff_0', 'del_n_eff'])
@@ -109,6 +111,9 @@ def flat_peak_fitting(ax5, ax6, xml):
             v_list.append(wavelength_sweep.get('DCBias'))
             ax5.plot(wavelength, result.best_fit, color=color, linestyle=':',
                      label=wavelength_sweep.get('DCBias') + ' V fit', lw=1)
+            ax7.plot(wavelength, result.best_fit, color=color, linestyle=':',
+                     label=wavelength_sweep.get('DCBias') + ' V fit', lw=1)
+
     v_list = list(map(float, v_list))
     del_n_list = list(map(float, del_n_list))
     ax6.scatter(v_list, del_n_list, label='n_V_curve')
