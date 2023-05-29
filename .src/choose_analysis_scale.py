@@ -31,7 +31,7 @@ def choose_analysis_scale(self):
     self.coordinate_list = list(coordinate_set)
     self.coordinate_list.sort()
     self.date_list = list(date_set)
-    self.lot_list.sort()
+    self.date_list.sort()
 
     # gui에 표시하기
     for lot in self.lot_list:
