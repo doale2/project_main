@@ -81,7 +81,6 @@ def init_GUI(self):
     self.coordinate_list = []
     self.date_list = []
 
-
     # tabview에 글씨 넣기
     self.select_listbox1 = tk.Listbox(self.tabview.tab("Lot ID"), width=30, height=15, selectmode='multiple',
                                       exportselection=0)
@@ -103,7 +102,6 @@ def init_GUI(self):
     self.select_listbox4.grid(row=1, column=0, padx=5, pady=5)
     self.select_listbox4.configure(background='#F9F9FA')
 
-
     # selected xml files 표기용 박스
     self.tabview_2 = customtkinter.CTkTabview(self,state='disabled', bg_color="transparent")
     self.tabview_2.grid(row=0, rowspan=3, column=2, columnspan=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
@@ -111,10 +109,9 @@ def init_GUI(self):
     self.textbox = customtkinter.CTkTextbox(self, width=110, height=100, state='disabled')
     self.textbox.grid(row=0, rowspan=3, column=2, columnspan=2, padx=(30, 30), pady=(70, 30), sticky="nsew")
 
-
     # 오른쪽 아래 analyze button
     self.analyze_button_1 = customtkinter.CTkButton(master=self, fg_color="#3B8ED0", border_width=0,
-                                                    text_color=("#DCE4EE"), text="analyze",
+                                                    text_color="#DCE4EE", text="analyze",
                                                     command=lambda: self.analyze_data([
                                                         'png' if method_var1.get() else None,
                                                         'csv' if method_var2.get() else None]))

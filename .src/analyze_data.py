@@ -1,8 +1,7 @@
 from tkinter import messagebox
 from matplotlib import pyplot as plt
-from select_analyze_data import select_analyze_data
 from iv_graph import parsing_iv_data, plot_iv, save_png_iv
-from handle_subplot import handle_subplot
+from setting_subplots import setting_subplots, handle_subplot
 from ts_graph import ts_graph, ts_fitting_graph, flat_ts_graph
 from save_csv import save_csv
 from ts_fitting import flat_peak_fitting
@@ -75,7 +74,7 @@ def analyze_data(self, option_list):
     formatted_datetime = create_res_subfolders()
     for i, xml in enumerate(self.xml_files):
         self.update()
-        ax1, ax2, ax3, ax4, ax5, ax6 = select_analyze_data()
+        ax1, ax2, ax3, ax4, ax5, ax6 = setting_subplots()
         # data 분석
         if 'csv' in option_list:
             function5(xml, formatted_datetime)
