@@ -63,7 +63,7 @@ def fitting_consider_voltage(wavelength, n_eff_0, del_n_eff):
     return I_0 * (np.sin(np.pi / wavelength * (subtraction_l2_l1 * n_eff_0 + l * del_n_eff))) ** 2
 
 
-def flat_peak_fitting(ax5, ax6, ax7, xml):
+def flat_peak_fitting(ax5, ax6, ax7, ax8, xml):
     import warnings
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     root, wavelength_data = parsing_ts_ref_data(xml)
@@ -120,3 +120,5 @@ def flat_peak_fitting(ax5, ax6, ax7, xml):
     fp_ax6 = np.polyfit(v_list, del_n_list, 2)  # 2차 근사
     f = np.poly1d(fp_ax6)  # Equation으로 만듬
     ax6.plot(v_list, list(f(v_list)), color='r', linestyle='--', lw=1, label='2th n_V fit')
+    VpiL = [wavelength / (del_n_list[0] - del_n_list[-2]) for wavelength in wavelength]
+    ax8.scatter(wavelength, VpiL, s=0.1, alpha=0.9, label='VpiL')

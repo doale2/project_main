@@ -10,27 +10,23 @@ from datetime import datetime
 
 
 def analyze_consequence(self, option_list):
-    if self.xml_files:
-        # check if all elements in the list are None
-        if all([opt is None for opt in option_list]):
-            messagebox.showerror("Error", "Please select at least one analysis method.")
-            return
+    try:
+        if self.xml_files:
+            # check if all elements in the list are None
+            if all([opt is None for opt in option_list]):
+                messagebox.showerror("Error", "Please select at least one analysis method.")
+                return
+            else:
+                analyze_data(self, option_list)
+                messagebox.showinfo("Done!", "Data analysis is complete.")
+                self.progress_ratio_label.configure(text="Progress ratio: 0%")
         else:
-            analyze_data(self, option_list)
-            messagebox.showinfo("Done!", "Data analysis is complete.")
-            self.progress_ratio_label.configure(text="Progress ratio:  0%")
-    else:
-        messagebox.showerror("Error", "please select at least one xml files")
-
-
-def show_selected_files(self):
-    if self.xml_files:
-        # If there are selected files, show the list in a message box
-        file_list = "\n".join([os.path.basename(file) for file in self.xml_files])
-        messagebox.showinfo("Selected Files", file_list)
-    else:
-        # If there are no selected files, show an error message
-        messagebox.showerror("No Files Selected", "Please select data folder first.")
+            messagebox.showerror("Error", "Please select at least one XML file")
+    except Exception as e:
+        self.progress_ratio_label.configure(text="Progress ratio: 0%")
+        self.update()
+        # Display an error message in a pop-up window
+        messagebox.showerror("Error", str(e))
 
 
 def function1(ax1, xml):
@@ -53,8 +49,8 @@ def function5(xml, formatted_datetime):
     save_csv(xml, formatted_datetime)
 
 
-def function6(ax5, ax6, ax7, xml):
-    flat_peak_fitting(ax5, ax6, ax7, xml)
+def function6(ax5, ax6, ax7, ax8, xml):
+    flat_peak_fitting(ax5, ax6, ax7, ax8, xml)
     if xml is not None:
         if "LMZC" in xml:
             ax7.set_xlim(1547, 1553)
@@ -79,7 +75,7 @@ def analyze_data(self, option_list):
     formatted_datetime = create_res_subfolders()
     for i, xml in enumerate(self.xml_files):
         self.update()
-        ax1, ax2, ax3, ax4, ax5, ax6, ax7 = setting_subplots()
+        ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8 = setting_subplots()
         # data 분석
         if 'csv' in option_list:
             function5(xml, formatted_datetime)
@@ -89,10 +85,9 @@ def analyze_data(self, option_list):
             function2(ax2, xml)
             function3(ax3, xml)
             function4(ax4, xml)
-            function6(ax5, ax6, ax7, xml)
-            handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7)
+            function6(ax5, ax6, ax7, ax8, xml)
+            handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8)
             save_png_iv(xml, formatted_datetime)
-
         plt.close('all')
         self.progress_value.set((i + 1) / len(self.xml_files))
         self.progress_bar.update_idletasks()
