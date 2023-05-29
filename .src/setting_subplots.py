@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def setting_subplots():
     # subplots 생성
-    fig, axs = plt.subplots(3, 3, figsize=(18, 8))
+    fig, axs = plt.subplots(3, 3, figsize=(18, 10.125))
     fig.subplots_adjust(hspace=0.7, wspace=0.5)
 
     ax1, ax2, ax3, ax4, ax5, ax6, ax7 = axs[1][0], axs[0][0], axs[0][1], axs[0][2], axs[1][1], axs[2][0], axs[1][2]
@@ -48,7 +48,7 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7):
         {'ax7_title': 'Flat Flat TS Enlarged', 'ax7_titlesize': 11,
          'ax7_xlabel': 'Wavelength [nm]', 'ax7_ylabel': 'Intensity [a.u.]', 'ax7_size': 9,
          'ax7_ticksize': 14,
-         'ax7_legendloc': 'lower center', 'ax7_legendncol': 3, 'ax7_legendsize': 4}
+         'ax7_legendloc': 'lower left', 'ax7_legendncol': 3, 'ax7_legendsize': 4}
     ]
 
     for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6, ax7]):
