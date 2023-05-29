@@ -3,15 +3,19 @@ import matplotlib.pyplot as plt
 
 def setting_subplots():
     # subplots 생성
-    fig, axs = plt.subplots(2, 3, figsize=(18, 8))
-    fig.subplots_adjust(hspace=0.5, wspace=0.5)
+    fig, axs = plt.subplots(3, 3, figsize=(18, 8))
+    fig.subplots_adjust(hspace=0.7, wspace=0.5)
 
-    ax1, ax2, ax3, ax4, ax5, ax6 = axs[1][0], axs[0][0], axs[0][1], axs[0][2], axs[1][1], axs[1][2]
+    ax1, ax2, ax3, ax4, ax5, ax6, ax7 = axs[1][0], axs[0][0], axs[0][1], axs[0][2], axs[1][1], axs[2][0], axs[1][2]
+    # Hide other graph
+    for ax in axs.flatten():
+        if ax not in [ax1, ax2, ax3, ax4, ax5, ax6, ax7]:
+            ax.axis('off')
 
-    return ax1, ax2, ax3, ax4, ax5, ax6
+    return ax1, ax2, ax3, ax4, ax5, ax6, ax7
 
 
-def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6):
+def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7):
     # Setting details
     detail_list = [
         {'ax1_title': 'IV - analysis', 'ax1_titlesize': 11,
@@ -39,10 +43,15 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6):
         {'ax6_title': 'n_V_curve', 'ax6_titlesize': 11,
          'ax6_xlabel': 'Voltage [V]', 'ax6_ylabel': 'del_n_eff', 'ax6_size': 9,
          'ax6_ticksize': 14,
-         'ax6_legendloc': 'lower center', 'ax6_legendncol': 1, 'ax6_legendsize': 8}
+         'ax6_legendloc': 'lower center', 'ax6_legendncol': 1, 'ax6_legendsize': 8},
+
+        {'ax7_title': 'Flat Flat TS Enlarged', 'ax7_titlesize': 11,
+         'ax7_xlabel': 'Wavelength [nm]', 'ax7_ylabel': 'Intensity [a.u.]', 'ax7_size': 9,
+         'ax7_ticksize': 14,
+         'ax7_legendloc': 'lower center', 'ax7_legendncol': 3, 'ax7_legendsize': 4}
     ]
 
-    for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6]):
+    for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6, ax7]):
         if axs is not None:
             details = detail_list[i]
             axs.set_xlabel(details[f'ax{i + 1}_xlabel'], size=details[f'ax{i + 1}_size'], fontweight='bold')
