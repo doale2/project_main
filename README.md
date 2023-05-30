@@ -74,8 +74,25 @@ such as the bandgap, of the device or structure.
 pip install -r requirements.txt
  ```
 
-## Usage  
-프로그램을 사용하는 자세한 방법
+## Usage
+  <img src="https://github.com/PE02teamD/project_main/assets/93698770/c743f132-67c9-4671-956d-3e4eb0eaf088" height="300"/>
+  
+  1. set data saving style. <br> you can select data save style _.png_ and _.csv_ both.
+  <br><img src="https://user-images.githubusercontent.com/127360881/241591917-e7c3a617-b38d-4acb-b9d6-5421d3fc8864.gif" height="150">
+
+  2. select files as _LOT ID, Wafer ID, Location, Date_. <br> when select nothing at list, select all automatically
+
+  3. show selected files. <br> after click _set scale_, show filename in this area.
+  <br><img src="https://user-images.githubusercontent.com/127360881/241591919-493b0b56-60ef-4e30-bc3f-2e314bc21c6d.gif" height="150">
+
+  4. UI settings. <br> change Appearance Mode _Light, Dark, System_ <br> change UI Scaling _80%, 90%, 100%, 110%, 120%_
+
+  5. set scale <br> save select files and show Number of Files.
+
+  6. progress bar <br> show progress ratio as the ratio which files are completed
+
+  7. analyze & exit <br> start analyze & exit button. <br> please check (1.)data saving style and (3.)selected XML files after analyze.
+
 
 ## Contributor  
 _Department of Photonics and Nanoelectronics_
