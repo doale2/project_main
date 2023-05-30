@@ -103,7 +103,7 @@ def init_GUI(self):
     self.select_listbox4.configure(background='#F9F9FA')
 
     # selected xml files 표기용 박스
-    self.tabview_2 = customtkinter.CTkTabview(self,state='disabled', bg_color="transparent")
+    self.tabview_2 = customtkinter.CTkTabview(self, state='disabled', bg_color="transparent")
     self.tabview_2.grid(row=0, rowspan=3, column=2, columnspan=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
     self.tabview_2.add("Selected XML files")
     self.textbox = customtkinter.CTkTextbox(self, width=110, height=100, state='disabled')

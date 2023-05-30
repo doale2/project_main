@@ -23,15 +23,15 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8):
          'ax1_legendloc': 'best', 'ax1_legendncol': 1, 'ax1_legendsize': 10},
 
         {'ax2_title': 'Transmission spectra - as measured', 'ax2_titlesize': 11,
-         'ax2_xlabel': 'Wavelength [nm]', 'ax2_ylabel': 'Measured_transmission [dB]', 'ax2_size': 9, 'ax2_ticksize': 14,
+         'ax2_xlabel': 'Wavelength [nm]', 'ax2_ylabel': 'Measured_transmission [dBm]', 'ax2_size': 9, 'ax2_ticksize': 14,
          'ax2_legendloc': 'lower center', 'ax2_legendncol': 3, 'ax2_legendsize': 8},
 
         {'ax3_title': 'Transmission spectra - as measured', 'ax3_titlesize': 11,
-         'ax3_xlabel': 'Wavelength [nm]', 'ax3_ylabel': 'Fitting Reference data', 'ax3_size': 9, 'ax3_ticksize': 14,
+         'ax3_xlabel': 'Wavelength [nm]', 'ax3_ylabel': 'Fitting Reference data [dBm]', 'ax3_size': 9, 'ax3_ticksize': 14,
          'ax3_legendloc': 'lower center', 'ax3_legendncol': 1, 'ax3_legendsize': 6.5},
 
         {'ax4_title': 'Flat Transmission spectra - as measured', 'ax4_titlesize': 11,
-         'ax4_xlabel': 'Wavelength [nm]', 'ax4_ylabel': 'Flat Measured_transmission [dB]', 'ax4_size': 9,
+         'ax4_xlabel': 'Wavelength [nm]', 'ax4_ylabel': 'Flat Measured_transmission [dBm]', 'ax4_size': 9,
          'ax4_ticksize': 14,
          'ax4_legendloc': 'lower center', 'ax4_legendncol': 3, 'ax4_legendsize': 6},
 
@@ -48,12 +48,12 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8):
         {'ax7_title': 'Flat Flat TS Enlarged', 'ax7_titlesize': 11,
          'ax7_xlabel': 'Wavelength [nm]', 'ax7_ylabel': 'Intensity [a.u.]', 'ax7_size': 9,
          'ax7_ticksize': 14,
-         'ax7_legendloc': 'lower left', 'ax7_legendncol': 3, 'ax7_legendsize': 4},
+         'ax7_legendloc': 'upper center', 'ax7_legendncol': 3, 'ax7_legendsize': 4},
 
-        {'ax8_title': 'VpiL', 'ax8_titlesize': 11,
-         'ax8_xlabel': 'Wavelength [nm]', 'ax8_ylabel': 'VpiL', 'ax8_size': 9,
+        {'ax8_title': 'Flat Flat TS Enlarged dBm', 'ax8_titlesize': 11,
+         'ax8_xlabel': 'Wavelength [nm]', 'ax8_ylabel': 'Flat Measured_transmission [dBm]', 'ax8_size': 9,
          'ax8_ticksize': 14,
-         'ax8_legendloc': 'upper right', 'ax8_legendncol': 1, 'ax8_legendsize': 4}
+         'ax8_legendloc': 'lower right', 'ax8_legendncol': 1, 'ax8_legendsize': 4}
     ]
 
     for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8]):
