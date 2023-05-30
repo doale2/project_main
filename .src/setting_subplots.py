@@ -3,19 +3,19 @@ import matplotlib.pyplot as plt
 
 def setting_subplots():
     # subplots 생성
-    fig, axs = plt.subplots(3, 3, figsize=(18, 8))
+    fig, axs = plt.subplots(3, 3, figsize=(18, 10.125))
     fig.subplots_adjust(hspace=0.7, wspace=0.5)
 
-    ax1, ax2, ax3, ax4, ax5, ax6, ax7 = axs[1][0], axs[0][0], axs[0][1], axs[0][2], axs[1][1], axs[2][0], axs[1][2]
+    ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8 = axs[1][0], axs[0][0], axs[0][1], axs[0][2], axs[1][1], axs[2][0], axs[1][2], axs[2][1]
     # Hide other graph
     for ax in axs.flatten():
-        if ax not in [ax1, ax2, ax3, ax4, ax5, ax6, ax7]:
+        if ax not in [ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8]:
             ax.axis('off')
 
-    return ax1, ax2, ax3, ax4, ax5, ax6, ax7
+    return ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8
 
 
-def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7):
+def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8):
     # Setting details
     detail_list = [
         {'ax1_title': 'IV - analysis', 'ax1_titlesize': 11,
@@ -48,10 +48,15 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7):
         {'ax7_title': 'Flat Flat TS Enlarged', 'ax7_titlesize': 11,
          'ax7_xlabel': 'Wavelength [nm]', 'ax7_ylabel': 'Intensity [a.u.]', 'ax7_size': 9,
          'ax7_ticksize': 14,
-         'ax7_legendloc': 'lower center', 'ax7_legendncol': 3, 'ax7_legendsize': 4}
+         'ax7_legendloc': 'lower left', 'ax7_legendncol': 3, 'ax7_legendsize': 4},
+
+        {'ax8_title': 'VpiL', 'ax8_titlesize': 11,
+         'ax8_xlabel': 'Wavelength [nm]', 'ax8_ylabel': 'VpiL', 'ax8_size': 9,
+         'ax8_ticksize': 14,
+         'ax8_legendloc': 'upper right', 'ax8_legendncol': 1, 'ax8_legendsize': 4}
     ]
 
-    for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6, ax7]):
+    for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8]):
         if axs is not None:
             details = detail_list[i]
             axs.set_xlabel(details[f'ax{i + 1}_xlabel'], size=details[f'ax{i + 1}_size'], fontweight='bold')
