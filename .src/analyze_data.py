@@ -56,7 +56,7 @@ def function6(ax5, ax6, ax7, ax8, xml):
 def create_res_subfolders():
     # 분석 시간 폴더 생성
     current_datetime = datetime.now()
-    formatted_datetime = current_datetime.strftime("%Y.%m.%d-%H%M%S")
+    formatted_datetime = current_datetime.strftime("%Y%m%d_%H%M%S")
     for root, dirs, files in os.walk('./dat'):
         if os.path.basename(root) != 'dat':
             for folder in dirs:
