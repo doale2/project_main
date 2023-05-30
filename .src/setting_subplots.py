@@ -53,7 +53,7 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8):
         {'ax8_title': 'VpiL', 'ax8_titlesize': 11,
          'ax8_xlabel': 'Wavelength [nm]', 'ax8_ylabel': 'VpiL', 'ax8_size': 9,
          'ax8_ticksize': 14,
-         'ax8_legendloc': 'lower center', 'ax8_legendncol': 3, 'ax8_legendsize': 6}
+         'ax8_legendloc': 'upper right', 'ax8_legendncol': 1, 'ax8_legendsize': 4}
     ]
 
     for i, axs in enumerate([ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8]):
