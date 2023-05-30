@@ -51,11 +51,6 @@ def function5(xml, formatted_datetime):
 
 def function6(ax5, ax6, ax7, ax8, xml):
     flat_peak_fitting(ax5, ax6, ax7, ax8, xml)
-    if xml is not None:
-        if "LMZC" in xml:
-            ax7.set_xlim(1547, 1553)
-        else:
-            ax7.set_xlim(1307, 1313)
 
 
 def create_res_subfolders():
