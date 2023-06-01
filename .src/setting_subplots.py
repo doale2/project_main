@@ -20,7 +20,7 @@ def handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8):
     detail_list = [
         {'ax1_title': 'IV - analysis', 'ax1_titlesize': 11,
          'ax1_xlabel': 'Voltage [V]', 'ax1_ylabel': 'Current [A]', 'ax1_size': 9, 'ax1_ticksize': 14,
-         'ax1_legendloc': 'best', 'ax1_legendncol': 1, 'ax1_legendsize': 10},
+         'ax1_legendloc': 'lower center', 'ax1_legendncol': 1, 'ax1_legendsize': 10},
 
         {'ax2_title': 'Transmission spectra - as measured', 'ax2_titlesize': 11,
          'ax2_xlabel': 'Wavelength [nm]', 'ax2_ylabel': 'Measured_transmission [dBm]', 'ax2_size': 9, 'ax2_ticksize': 14,

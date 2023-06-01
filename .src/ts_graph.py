@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import find_peaks
 from sklearn.metrics import r2_score
+from iv_graph import parsing_iv_data
+from iv_fitting import iv_fitting
 
 
 def parsing_ts_ref_data(xml):
@@ -60,11 +62,12 @@ def ts_fitting_graph(ax3, xml):
                  label=f'{i}th R² = {r2_list[i - 2]}')
 
 
-def extract_max_r2_value_ax3(xml):
+def extract_value(xml):
     root, wavelength_data = parsing_ts_ref_data(xml)
+    iv_data = parsing_iv_data(xml)
     r2_list = []
     max_r2, max_i = 0, 0
-
+    r2_iv = r2_score(iv_data['current'], iv_fitting(iv_data))
     for i in range(2, 9):
         fp = np.polyfit(wavelength_data['wavelength'], wavelength_data['measured_transmission'], i)
         f = np.poly1d(fp)
@@ -76,19 +79,22 @@ def extract_max_r2_value_ax3(xml):
             max_r2 = r2
             max_transmission = max(f(wavelength_data['wavelength']))
 
-    if max_r2 > 0.95:
+    if max_r2 > 0.95 and r2_iv > 0.95:
         error_flag = 0
     else:
-        error_flag = 1
+        if r2_iv < 0.95:
+            error_flag = 1
+        elif max_r2 < 0.95:
+            error_flag = 2
 
-    return max_i, error_flag, max_f, max_r2, max_transmission
+    return r2_iv, max_i, error_flag, max_f, max_r2, max_transmission
 
 
 def flat_ts_graph(ax4, xml):
     import warnings
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     root, wavelength_data = parsing_ts_ref_data(xml)
-    max_i, error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
+    r2_iv, max_i, error_flag, max_f, max_r2, max_transmission = extract_value(xml)
 
     cmap = plt.colormaps.get_cmap('jet')
     # Iterate over the first 6 WavelengthSweep elements

@@ -11,7 +11,7 @@ def init_GUI(self):
 
     # 창 생성
     self.title("Wafer Analysis")
-    self.geometry(f"{1050}x{700}")
+    self.geometry(f"{1000}x{700}")
 
     # configure grid layout (4x4)
     self.grid_columnconfigure(1, weight=1)
@@ -65,7 +65,7 @@ def init_GUI(self):
 
     # set scale
     self.sidebar_button_1 = customtkinter.CTkButton(self, command=self.save_choosed_data, text="set scale")
-    self.sidebar_button_1.grid(row=3, column=1,sticky="ne", pady=10)
+    self.sidebar_button_1.grid(row=3, column=1, sticky="ne", pady=10)
 
     # progress bar
     self.progress_value = customtkinter.DoubleVar()
@@ -82,22 +82,22 @@ def init_GUI(self):
     self.date_list = []
 
     # tabview에 글씨 넣기
-    self.select_listbox1 = tk.Listbox(self.tabview.tab("Lot ID"), width=30, height=15, selectmode='multiple',
+    self.select_listbox1 = tk.Listbox(self.tabview.tab("Lot ID"), width=34, height=15, selectmode='multiple',
                                       exportselection=0)
     self.select_listbox1.grid(row=1, column=0, padx=5, pady=5)
     self.select_listbox1.configure(background='#F9F9FA')
 
-    self.select_listbox2 = tk.Listbox(self.tabview.tab("Wafer ID"), width=30, height=15, selectmode='multiple',
+    self.select_listbox2 = tk.Listbox(self.tabview.tab("Wafer ID"), width=34, height=15, selectmode='multiple',
                                       exportselection=0)
     self.select_listbox2.grid(row=1, column=0, padx=5, pady=5)
     self.select_listbox2.configure(background='#F9F9FA')
 
-    self.select_listbox3 = tk.Listbox(self.tabview.tab("Location"), width=30, height=15, selectmode='multiple',
+    self.select_listbox3 = tk.Listbox(self.tabview.tab("Location"), width=34, height=15, selectmode='multiple',
                                       exportselection=0)
     self.select_listbox3.grid(row=1, column=0, padx=5, pady=5)
     self.select_listbox3.configure(background='#F9F9FA')
 
-    self.select_listbox4 = tk.Listbox(self.tabview.tab("Date"), width=30, height=15, selectmode='multiple',
+    self.select_listbox4 = tk.Listbox(self.tabview.tab("Date"), width=34, height=15, selectmode='multiple',
                                       exportselection=0)
     self.select_listbox4.grid(row=1, column=0, padx=5, pady=5)
     self.select_listbox4.configure(background='#F9F9FA')
