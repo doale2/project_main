@@ -3,7 +3,7 @@ import numpy as np
 from lmfit import Model
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
-from ts_graph import parsing_ts_ref_data, extract_max_r2_value_ax3
+from ts_graph import parsing_ts_ref_data, extract_value
 
 
 def dbm_to_linear(dBm):
@@ -26,7 +26,7 @@ def extract_n_eff(xml):
     import warnings
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     root, wavelength_data = parsing_ts_ref_data(xml)
-    max_i, error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
+    r2_iv, max_i, error_flag, max_f, max_r2, max_transmission = extract_value(xml)
 
     for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
         if i == 4:
@@ -73,7 +73,7 @@ def flat_peak_fitting(ax5, ax6, ax7, ax8, xml):
     import warnings
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     root, wavelength_data = parsing_ts_ref_data(xml)
-    max_i, error_flag, max_f, max_r2, max_transmission = extract_max_r2_value_ax3(xml)
+    r2_iv, max_i, error_flag, max_f, max_r2, max_transmission = extract_value(xml)
     cmap = plt.colormaps.get_cmap('jet')
     del_n_list, v_list = [], []
     for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):

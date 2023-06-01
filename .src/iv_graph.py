@@ -29,8 +29,9 @@ def plot_iv(ax1, iv_data):
     for x, y in zip(iv_data['voltage'], iv_data['current']):
         if x in [-2.0, -1.0, 1.0]:
             ax1.annotate(f"{y:.2e}A", xy=(x, y), xytext=(3, 10), textcoords='offset points', ha='center', fontsize=8)
-    ax1.annotate(f"R² = {r2_score(iv_data['current'], iv_fitting(iv_data))}", xy=(-1.0, 10 ** -3), ha='left',
-                 fontsize=9)
+    ax1.annotate(f"R² = {r2_score(iv_data['current'], iv_fitting(iv_data))}", xy=(1, 1), xycoords='axes fraction', xytext=(0.75, 0.95),
+                 textcoords='axes fraction', fontsize=9, ha='right', va='top',
+                 bbox=dict(boxstyle='round', facecolor='white', edgecolor='gray'))
 
 
 def save_png_iv(xml, formatted_datetime):
@@ -43,4 +44,3 @@ def save_png_iv(xml, formatted_datetime):
     filename = os.path.basename(xml)
     filename = os.path.splitext(filename)[0]
     plt.savefig(f'{save_directory}/{filename}.png', dpi=300)
-
