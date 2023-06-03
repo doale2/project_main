@@ -1,12 +1,12 @@
 from tkinter import messagebox
 from matplotlib import pyplot as plt
-from iv_graph import parsing_iv_data, plot_iv, save_png_iv
-from setting_subplots import setting_subplots, handle_subplot
-from ts_graph import ts_graph, ts_fitting_graph, flat_ts_graph
-from save_csv import save_csv
-from ts_fitting import flat_peak_fitting
-import os
 from datetime import datetime
+import os
+from iv_graph import parsing_iv_data, plot_iv, save_png_iv
+from ts_graph import ts_graph, ts_fitting_graph, flat_ts_graph
+from ts_fitting import flat_peak_fitting
+from setting_subplots import setting_subplots, handle_subplot
+from save_csv import save_csv
 
 
 def analyze_consequence(self, option_list):
@@ -51,17 +51,12 @@ def function5(xml, formatted_datetime):
 
 def function6(ax5, ax6, ax7, ax8, xml):
     flat_peak_fitting(ax5, ax6, ax7, ax8, xml)
-    if xml is not None:
-        if "LMZC" in xml:
-            ax7.set_xlim(1547, 1553)
-        else:
-            ax7.set_xlim(1307, 1313)
 
 
 def create_res_subfolders():
     # 분석 시간 폴더 생성
     current_datetime = datetime.now()
-    formatted_datetime = current_datetime.strftime("%Y.%m.%d-%H%M%S")
+    formatted_datetime = current_datetime.strftime("%Y%m%d_%H%M%S")
     for root, dirs, files in os.walk('./dat'):
         if os.path.basename(root) != 'dat':
             for folder in dirs:

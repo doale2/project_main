@@ -2,12 +2,10 @@ import xml.etree.ElementTree as elemTree
 from datetime import datetime
 import numpy as np
 import pandas as pd
-from ts_graph import extract_max_r2_value_ax3
-from iv_fitting import iv_fitting
-from iv_graph import parsing_iv_data
-from sklearn.metrics import r2_score
 import os
 import glob
+from iv_graph import parsing_iv_data
+from ts_fitting import extract_value
 
 
 def extract_lot_data(xml):
@@ -44,17 +42,22 @@ def save_csv(xml, formatted_datetime):
     warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
     username = os.environ.get('USERNAME')
     iv_data = parsing_iv_data(xml)
-    y_fit = iv_fitting(iv_data)
-    max_i, error_flag, max_f, max_r2_TS, max_transmission = extract_max_r2_value_ax3(xml)
+    r2_iv, max_i, error_flag, max_f, max_r2_TS, max_transmission = extract_value(xml)
+    if error_flag == 0:
+        error_script = 'No Error'
+    elif error_flag == 1:
+        error_script = 'IV. spec. Error'
+    elif error_flag == 2:
+        error_script = 'Ref. spec. Error'
     lot, wafer, mask, test, name, date, oper, row, col, analysis_wl = extract_lot_data(xml)
 
     df = pd.DataFrame({'Lot': lot, 'Wafer': wafer, 'Mask': mask, 'TestSite': test, 'Name': name, 'Date': date,
                        'Script ID': f'process {test[0].split("_")[-1]}', 'Script Version': 0.1, 'Script Owner': f'D_{username}',
                        'Operator': oper, 'Row': row, 'Column': col, 'ErrorFlag': error_flag,
-                       'Error description': 'No Error' if error_flag == 0 else 'Ref. spec. Error',
+                       'Error description': error_script,
                        'Analysis Wavelength': analysis_wl,
                        'Rsq of Ref. spectrum (Nth)': max_r2_TS, 'Max transmission of Ref. spec. (dB)': max_transmission,
-                       'Rsq of IV': r2_score(iv_data['current'], y_fit), 'I at -1V [A]': iv_data['current'][4],
+                       'Rsq of IV': r2_iv, 'I at -1V [A]': iv_data['current'][4],
                        'I at 1V [A]': iv_data['current'][-1]})
 
     df.to_csv(f'./res/{formatted_datetime}/{os.path.basename(xml)}.csv', index=False)
