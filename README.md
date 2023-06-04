@@ -77,6 +77,7 @@ Install requirements to run our code
  ```{.python}
 pip install -r requirements.txt
  ```
+Run "run.py"
 
 ## Usage
   <img src="https://user-images.githubusercontent.com/93698770/241849695-c743f132-67c9-4671-956d-3e4eb0eaf088.png" height="300">
