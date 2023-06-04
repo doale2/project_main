@@ -5,7 +5,8 @@ import pandas as pd
 import os
 import glob
 from iv_graph import parsing_iv_data
-from ts_fitting import extract_n_eff, extract_value
+from ts_graph import extract_value
+from ts_fitting import extract_n_eff, extract_VpiL
 
 
 def extract_lot_data(xml):
@@ -44,6 +45,7 @@ def save_csv(xml, formatted_datetime):
     iv_data = parsing_iv_data(xml)
     r2_iv, max_i, error_flag, max_f, max_r2_TS, max_transmission = extract_value(xml)
     n_eff_0V = extract_n_eff(xml)
+    VpiL = extract_VpiL(xml)
     if error_flag == 0:
         error_script = 'No Error'
     elif error_flag == 1:
@@ -59,7 +61,7 @@ def save_csv(xml, formatted_datetime):
                        'Analysis Wavelength': analysis_wl,
                        'Rsq of Ref. spectrum (Nth)': max_r2_TS, 'Max transmission of Ref. spec. (dB)': max_transmission,
                        'Rsq of IV': r2_iv, 'I at -1V [A]': iv_data['current'][4],
-                       'I at 1V [A]': iv_data['current'][-1], 'n_eff_0V': n_eff_0V})
+                       'I at 1V [A]': iv_data['current'][-1], 'n_eff_0V': n_eff_0V, 'VpiL': VpiL})
 
     df.to_csv(f'./res/{formatted_datetime}/{os.path.basename(xml)}.csv', index=False)
 
