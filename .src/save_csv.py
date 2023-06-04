@@ -5,7 +5,7 @@ import pandas as pd
 import os
 import glob
 from iv_graph import parsing_iv_data
-from ts_fitting import extract_n_eff, extract_value, extract_r2_nV
+from ts_fitting import extract_n_eff, extract_value
 
 
 def extract_lot_data(xml):
