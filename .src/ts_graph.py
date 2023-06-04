@@ -52,8 +52,8 @@ def ts_fitting_graph(ax3, xml):
 
     r2_list = []
     ax3.plot('wavelength', 'measured_transmission', data=wavelength_data, label='')
-    for i in range(2, 9):
-        color = cmap((i - 2) / 7)
+    for i in range(1, 9):
+        color = cmap((i - 1) / 7)
         fp = np.polyfit(wavelength_data['wavelength'], wavelength_data['measured_transmission'], i)
         f = np.poly1d(fp)
         r2 = r2_score(wavelength_data['measured_transmission'], f(wavelength_data['wavelength']))
