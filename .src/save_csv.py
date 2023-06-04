@@ -43,17 +43,13 @@ def save_csv(xml, formatted_datetime):
     username = os.environ.get('USERNAME')
     iv_data = parsing_iv_data(xml)
     r2_iv, max_i, error_flag, max_f, max_r2_TS, max_transmission = extract_value(xml)
-    n_eff_0V, r2_nV = extract_n_eff(xml), extract_r2_nV(xml)
-    if r2_nV < 0.95:
-        error_flag = 3
+    n_eff_0V = extract_n_eff(xml), extract_r2_nV(xml)
     if error_flag == 0:
         error_script = 'No Error'
     elif error_flag == 1:
         error_script = 'IV. spec. Error'
     elif error_flag == 2:
         error_script = 'Ref. spec. Error'
-    elif error_flag == 3:
-        error_script = 'nV. spec. Error'
     lot, wafer, mask, test, name, date, oper, row, col, analysis_wl = extract_lot_data(xml)
 
     df = pd.DataFrame({'Lot': lot, 'Wafer': wafer, 'Mask': mask, 'TestSite': test, 'Name': name, 'Date': date,
@@ -62,7 +58,7 @@ def save_csv(xml, formatted_datetime):
                        'Error description': error_script,
                        'Analysis Wavelength': analysis_wl,
                        'Rsq of Ref. spectrum (Nth)': max_r2_TS, 'Max transmission of Ref. spec. (dB)': max_transmission,
-                       'Rsq of IV': r2_iv, 'Rsq of nV': r2_nV, 'I at -1V [A]': iv_data['current'][4],
+                       'Rsq of IV': r2_iv, 'I at -1V [A]': iv_data['current'][4],
                        'I at 1V [A]': iv_data['current'][-1], 'n_eff_0V': n_eff_0V})
 
     df.to_csv(f'./res/{formatted_datetime}/{os.path.basename(xml)}.csv', index=False)
