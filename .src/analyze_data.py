@@ -72,8 +72,6 @@ def analyze_data(self, option_list):
         self.update()
         ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8 = setting_subplots()
         # data 분석
-        if 'csv' in option_list:
-            function5(xml, formatted_datetime)
         if 'png' in option_list:
             ax1.set_yscale('log', base=10)
             function1(ax1, xml)
@@ -83,6 +81,8 @@ def analyze_data(self, option_list):
             function6(ax5, ax6, ax7, ax8, xml)
             handle_subplot(ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8)
             save_png_iv(xml, formatted_datetime)
+        if 'csv' in option_list:
+            function5(xml, formatted_datetime)
         plt.close('all')
         self.progress_value.set((i + 1) / len(self.xml_files))
         self.progress_bar.update_idletasks()
