@@ -43,7 +43,7 @@ def save_csv(xml, formatted_datetime):
     username = os.environ.get('USERNAME')
     iv_data = parsing_iv_data(xml)
     r2_iv, max_i, error_flag, max_f, max_r2_TS, max_transmission = extract_value(xml)
-    n_eff_0V = extract_n_eff(xml), extract_r2_nV(xml)
+    n_eff_0V = extract_n_eff(xml)
     if error_flag == 0:
         error_script = 'No Error'
     elif error_flag == 1:
