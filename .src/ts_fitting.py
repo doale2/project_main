@@ -3,6 +3,7 @@ import numpy as np
 from lmfit import Model
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
+from sklearn.metrics import r2_score
 from ts_graph import parsing_ts_ref_data, extract_value
 
 
@@ -165,3 +166,47 @@ def flat_peak_fitting(ax5, ax6, ax7, ax8, xml):
     ax6.annotate(f'VpiL: {VpiL} [V·cm]', xy=(1, 1), xycoords='axes fraction', xytext=(0.95, 0.95),
                  textcoords='axes fraction', fontsize=9, ha='right', va='top',
                  bbox=dict(boxstyle='round', facecolor='white', edgecolor='gray'))
+
+
+def extract_r2_nV(xml):
+    import warnings
+    warnings.filterwarnings('ignore', message='Polyfit may be poorly conditioned', category=np.RankWarning)
+    root, wavelength_data = parsing_ts_ref_data(xml)
+    r2_iv, max_i, error_flag, max_f, max_r2, max_transmission = extract_value(xml)
+    del_n_list, v_list = [], []
+    ax5_xlist, ax5_ylist, ax6_xlist, ax6_ylist, ax7_xlist, ax7_ylist, ax8_xlist, ax8_ylist = [], [], [], [], [], [], [], []
+    VpiL = 0
+    for i, wavelength_sweep in enumerate(root.iter('WavelengthSweep')):
+        if i != 6:
+            # Make it a dict for easier handling
+            wavelength_data = {'wavelength': [], 'measured_transmission': []}
+            # Get data from each element
+            wavelength = list(map(float, wavelength_sweep.find('L').text.split(',')))
+            measured_transmission = list(map(float, wavelength_sweep.find('IL').text.split(',')))
+            # Subtract y2
+            measured_transmission -= max_f(wavelength)
+            wavelength_data['wavelength'].extend(wavelength)
+            wavelength_data['measured_transmission'].extend(measured_transmission)
+            # Extract peak
+            peaks_index, _ = find_peaks(wavelength_data['measured_transmission'], prominence=5)
+            x_peaks, y_peaks = [], []
+            for index in peaks_index:
+                x_peaks.append(wavelength_data['wavelength'][index])
+                y_peaks.append(wavelength_data['measured_transmission'][index])
+            fp = np.polyfit(x_peaks, y_peaks, 1)  # 극댓값들로 1차 근사
+            f = np.poly1d(fp)  # Equation으로 만듬
+            wavelength_data['measured_transmission'] -= f(wavelength)
+            wavelength_data['measured_transmission'] = dbm_to_linear(wavelength_data['measured_transmission'])
+            model = Model(fitting_consider_voltage, independent_vars=['wavelength'],
+                          param_names=['n_eff_0', 'del_n_eff'])
+            # Set the initial parameter values and boundaries
+            model.set_param_hint('n_eff_0', value=extract_n_eff(xml), vary=False)
+            model.set_param_hint('del_n_eff', value=0.0)
+            # Fit the model to the data
+            result = model.fit(wavelength_data['measured_transmission'], wavelength=wavelength)
+            del_n_list.append(result.best_values.get('del_n_eff'))
+            v_list.append(wavelength_sweep.get('DCBias'))
+    v_list = list(map(float, v_list))
+    del_n_list = list(map(float, del_n_list))
+    r2_nV = r2_score(del_n_list, list(f(v_list)))
+    return r2_nV

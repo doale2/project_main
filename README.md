@@ -165,9 +165,6 @@ _In HANYANG University ERICA Campus_
     <img src="https://img.shields.io/badge/Github-181717?style=flat&logo=Github&logoColor=white"/>
 </div>
 
-## Acknowledgments  
-추가적으로 알리고 싶은 것 e.g. 분석 설명같은 것들
-
 ## Enquiry  
 If you have any questions or suggestions about this repository, please contact us using the contributors' information.  
 
