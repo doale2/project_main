@@ -9,8 +9,7 @@
 - [Installation](#installation)  
 - [Usage](#usage)  
 - [Contributor](#contributor)
-- [Environment](#environment)  
-- [Acknowledgments](#acknowledgments)
+- [Environment](#environment)
 - [Enquiry](#enquiry)  
 
 *****
@@ -70,20 +69,23 @@ such as the bandgap, of the device or structure.
 *****
 
 ## Installation  
+First, clone our project files in your repository  
+ ```{.python}
+git clone https://github.com/PE02teamD/project_main.git
+ ```
+Install requirements to run our code  
  ```{.python}
 pip install -r requirements.txt
  ```
 
 ## Usage
-  <img src="https://github.com/PE02teamD/project_main/assets/93698770/c743f132-67c9-4671-956d-3e4eb0eaf088" height="300"/>
+  <img src="https://user-images.githubusercontent.com/93698770/241849695-c743f132-67c9-4671-956d-3e4eb0eaf088.png" height="300">
   
   1. set data saving style. <br> you can select data save style _.png_ and _.csv_ both.
-  <br><img src="https://user-images.githubusercontent.com/127360881/241591917-e7c3a617-b38d-4acb-b9d6-5421d3fc8864.gif" height="150">
 
   2. select files as _LOT ID, Wafer ID, Location, Date_. <br> when select nothing at list, select all automatically
 
   3. show selected files. <br> after click _set scale_, show filename in this area.
-  <br><img src="https://user-images.githubusercontent.com/127360881/241591919-493b0b56-60ef-4e30-bc3f-2e314bc21c6d.gif" height="150">
 
   4. UI settings. <br> change Appearance Mode _Light, Dark, System_ <br> change UI Scaling _80%, 90%, 100%, 110%, 120%_
 
@@ -92,14 +94,12 @@ pip install -r requirements.txt
   6. progress bar <br> show progress ratio as the ratio which files are completed
 
   7. analyze & exit <br> start analyze & exit button. <br> please check (1.)data saving style and (3.)selected XML files after analyze.
-
+  <br><img src="https://user-images.githubusercontent.com/119747175/243174250-1e3d9134-54a9-400e-bf1b-bb5474c8c8f9.gif" height="300">
 
 ## Contributor  
 _Department of Photonics and Nanoelectronics_
 
 _In HANYANG University ERICA Campus_
-
-
 
 - **Jungwan Noh**
   
@@ -167,6 +167,5 @@ _In HANYANG University ERICA Campus_
 
 ## Enquiry  
 If you have any questions or suggestions about this repository, please contact us using the contributors' information.  
-
 
 Also, before submitting any questions or suggestions, please check if there is already something related to this repository.
